@@ -128,11 +128,6 @@ const HomeForm = () => {
         <c.SmallText style={{ textAlign: 'start', position: 'relative', top: '-40px', left: '330px' }}>{'세계 어디서나 편리한 결제와 \nATM기 이용으로 편하게 현금화'}</c.SmallText>
       </MidContainer>
 
-      {/* <MidContainer style={{height: '2557px'}}>
-        
-      </MidContainer> */}
-
-
     </HomeContainer>
   );
 };
