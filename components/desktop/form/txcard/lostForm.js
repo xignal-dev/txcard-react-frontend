@@ -203,7 +203,10 @@ const LostForm = ({ setState }) => {
 
 
   useEffect(() => {
-
+    const init = async () => {
+    }
+    
+    init();
   }, []);
 
 

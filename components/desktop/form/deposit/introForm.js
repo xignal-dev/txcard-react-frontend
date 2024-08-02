@@ -95,22 +95,12 @@ const IntroForm = ({ setMemberShipState }) => {
 
   const [selectedMenu, setSelectedMenu] = useState(1);
 
-  const [memberId, setMemberId] = useState('');
-  const [memberPw, setMemberPw] = useState('');
-
   useEffect(() => {
-
+    const init = async () => {
+    }
+    
+    init();
   }, []);
-
-
-
-  const onChangeId = (e) => {
-    setMemberId(e.target.value);
-  }
-
-  const onChangePw = (e) => {
-    setMemberPw(e.target.value);
-  }
 
   return (
     <HomeContainer>

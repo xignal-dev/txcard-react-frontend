@@ -220,16 +220,11 @@ const IssueForm = ({ setState }) => {
   const [mobile, setMobile] = useState('');
   const [address, setAddress] = useState('');
 
-  const countries = [
-    { value: 0, label: '한국' },
-    { value: 1, label: '미국' },
-    { value: 2, label: '일본' },
-    { value: 3, label: '베트남' },
-  ];
-
-
   useEffect(() => {
-
+    const init = async () => {
+    }
+    
+    init();
   }, []);
 
 

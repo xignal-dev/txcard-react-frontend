@@ -102,11 +102,11 @@ const LoginForm = ({setMemberShipState}) => {
   const [memberPw, setMemberPw] = useState('');
 
   useEffect(() => {
-    const preLogin = async () => {
+    const init = async () => {
       console.log('accessToken', window.localStorage.getItem('accessToken'));
     };
 
-    preLogin();
+    init();
   }, []);
 
 

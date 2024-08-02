@@ -182,7 +182,10 @@ const RegisterForm = ({ setState }) => {
 
 
   useEffect(() => {
-
+    const init = async () => {
+    }
+    
+    init();
   }, []);
 
 

@@ -31,11 +31,7 @@ const TxCard = () => {
 	}, []);
 
   const renderTxCard = () => {
-    
-    // const params = new URLSearchParams(window.location.search);
-    // const s = params.get("state");
-    // console.log(s);
-    
+
     return (
       <>
         <Header />

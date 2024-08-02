@@ -81,38 +81,12 @@ const HistoryForm = ({ setState }) => {
 
   const inputEl = useRef(null);
 
-  const [cardNum1, setCardNum1] = useState('');
-  const [cardNum2, setCardNum2] = useState('');
-  const [cardNum3, setCardNum3] = useState('');
-  const [cardNum4, setCardNum4] = useState('');
-
-
   useEffect(() => {
-
+    const init = async () => {
+    }
+    
+    init();
   }, []);
-
-
-
-  const onChangeCardNum1 = (e) => {
-    e.target.value = e.target.value.replace(/[^0-9]/g, '');
-    setCardNum1(e.target.value);
-  }
-
-  const onChangeCardNum2 = (e) => {
-    e.target.value = e.target.value.replace(/[^0-9]/g, '');
-    setCardNum2(e.target.value);
-  }
-
-  const onChangeCardNum3 = (e) => {
-    e.target.value = e.target.value.replace(/[^0-9]/g, '');
-    setCardNum3(e.target.value);
-  }
-
-  const onChangeCardNum4 = (e) => {
-    e.target.value = e.target.value.replace(/[^0-9]/g, '');
-    setCardNum4(e.target.value);
-  }
-
 
   return (
     <HomeContainer>

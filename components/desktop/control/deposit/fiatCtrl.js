@@ -74,13 +74,14 @@ const FiatCtrl = () => {
 
   const stores = useStore(Stores);
 
-
-
   const [memberId, setMemberId] = useState('');
   const [memberPw, setMemberPw] = useState('');
 
   useEffect(() => {
-
+    const init = async () => {
+    }
+    
+    init();
   }, []);
 
 

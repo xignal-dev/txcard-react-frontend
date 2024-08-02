@@ -81,11 +81,11 @@ const HomeForm = () => {
   const stores = useStore(Stores);
 
   useEffect(() => {
-    const preLogin = async () => {
+    const init = async () => {
       console.log('accessToken', window.localStorage.getItem('accessToken'));
     };
 
-    preLogin();
+    init();
   }, []);
 
   return (

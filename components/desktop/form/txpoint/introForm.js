@@ -84,6 +84,10 @@ const IntroForm = ({ setState }) => {
 
 
   useEffect(() => {
+    const init = async () => {
+    }
+    
+    init();
   }, []);
 
 

@@ -81,22 +81,12 @@ const IntroForm = ({setState}) => {
 
   const stores = useStore(Stores);
   
-  
-
   useEffect(() => {
+    const init = async () => {
+    }
+    
+    init();
   }, []);
-
-
-
-  const onChangeId = (e) => {
-    // e.target.value = e.target.value.replace(/[^0-9]/g, '');
-    // setMemberId(e.target.value.replace(/[^0-9]/g, ''));
-    setMemberId(e.target.value);
-  }
-
-  const onChangePw = (e) => {
-    setMemberPw(e.target.value);
-  }
 
   return (
     <HomeContainer>

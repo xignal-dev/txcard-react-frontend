@@ -167,7 +167,10 @@ const ExchangeForm = ({ setState }) => {
 
 
   useEffect(() => {
-
+    const init = async () => {
+    }
+    
+    init();
   }, []);
 
 
