@@ -1,0 +1,803 @@
+{
+  "Public": {
+    "million": "миллион",
+    "korean": "한국어",
+    "english": "English",
+    "russian": "Русский",
+    "confirm": "Подтвердить",
+    "cancel": "Отменить",
+    "deposit": "Ввод средств",
+    "withdrawal": "Вывод средств"
+  },
+  "TabLabel": {
+    "ExchangeStack": "Биржа",
+    "BalanceStack": "Баланс",
+    "InvestmentStack": "Мои сделки",
+    "UserStack": "Моя страница",
+    
+    "NoticeStack": "Notice",
+    "HomeStack": "Home",
+    "MyInfoStack": "My Info",
+    "MyInvestmentStack": "Investments"
+  },
+  "ErrorHelper": {
+    "statement/password_too_short": "Пароль должен содержать более 8 символов.",
+    "statement/password_too_common": "Непрерывные цифры, буквы и слова, соединенные на клавиатуре, не допускаются.",
+    "statement/password_entirely_numeric": "Пароль не может состоять только из цифр.",
+    "statement/minimum_order_amount_not_met": "Сумма ордера должна быть больше минимальной суммы ордера.",
+    "statement/you-left": "Эта учетная запись удалена.",
+    "statement/wrong-email-password": "Неверный адрес электронной почты или пароль.",
+    "statement/too-many-attemps": "Недоступно из-за слишком большого количества неудачных попыток. Повторите попытку через 24 часа.",
+    "statement/not_allowed_to_withdraw_yet": "Вывод средств ограничен в течение 72 часов после первого депозита в KRW и автоматически разблокируется через 72 часа.",
+    "statement/email-address-is-already-registered": "Электронный адрес уже зарегистрирован.",
+    "statement/passwords-are-not-equal": "Пароли не совпадают.",
+    "statement/you-already-have-pending-deposits": "У вас уже есть вывод средств в ожидании.",
+    "statement/referral-code-not-exists": "Реферальный код недействителен.",
+    "statement/is-not-available-value": "Число вне допустимого диапазона.",
+    "statement/balance-is-not-enough": "Проверьте доступную сумму ордера.",
+    "statement/only-english-characters-and-numbers-are-allowed": "Реферальный код должен содержать от 4 до 10 символов латинского алфавита или цифр.",
+    "statement/please-input-memo": "Введите заметку",
+    "statement/provided-otp-code-is-not-verified": "OTP-код не подтвержден.",
+    "statement/provided-temporary-password-reset-token-expired": "Срок действия вашего токена сброса пароля истек.",
+    "statement/withdrawal-has-already-been-approved": "Вывод средств пожтвержден.",
+    "statement/withdrawal-amount-exceeds-overdraft-limit": "Проверьте доступную сумму для вывода средств.",
+    "statement/this-referral-code-is-already-in-use": "Реферальный код уже существует.",
+    "statement/invalid-wallet-address": "Проверьте адрес вывода средств.",
+    "statement/wallet-not-exists": "Кошелек не существует.",
+    "statement/email-should-be-verified-to-create-referral-code": "Для генерации реферального кода подтвердите адрес электронной почты.",
+    "statement/too-small-value": "Проверьте минимальную сумму.",
+    "statement/not-authenticated": "Аккаунт не найден. Попробуйте войти снова.",
+    "statement/the-number-is-already-in-use": "Этот номер уже используется.",
+    "statement/token-expired": "Срок действия токена истек. Повторите попытку.",
+    "statement/email-blank": "Введите свой адрес электронной почты.",
+    "statement/password-blank": "Введите пароль",
+    "statement/please-check-empty-input-box": "Проверьте, есть ли пустое поле ввода.",
+    "statement/otp-blank": "Введите OTP-код",
+    "statement/already-email-verified": "Этот адрес электронной почты уже подтвержден.",
+    "statement/cannot-change-previously-registered-password": "Новый пароль должен отличаться от старого.",
+    "statement/code-not-exists": "Код авторизации не существует.",
+    "statement/own-wallet-withdrawal-not-allowed": "Вы не можете вывести деньги на свой адрес, выданный {{exchange_name}}.",
+    "statement/no-support-coin": "Создание адреса кошелька для данной монеты не поддерживается.",
+    "statement/email-does-not-match": "Информация не совпадает. Повторите попытку.",
+    "statement/invalid-input": "Загрузите файл.",
+    "statement/invalid-image": "Неверный формат файла.",
+    "statement/email-wrong-format": "Неверный формат электронной почты.",
+    "statement/terms-of-service-not-agreed": "Вы не согласились с условиями использования.",
+    "statement/privacy-collection-not-agreed": "Вы не согласились со сбором и использованием личной информации.",
+    "statement/privacy-handling-not-agreed": "Вы не согласились с правилами обработки личной информации.",
+    "statement/privacy-movement-not-agreed": "Вы не дали согласия на передачу личной информации за границу.",
+    "statement/check-if-data-is-invalid": "Проверьте, не введены ли неверные данные.",
+    "statement/need-to-register-email": "Вы должны ввести адрес электронной почты.",
+    "statement/need-to-verify-previous": "Требуется предыдущий шаг проверки.",
+    "statement/price-should-be-positive": "Цена должна быть положительным числом больше нуля.",
+    "statement/price-or-volume-should-not-empty": "Проверьте цену или сумму.",
+    "statement/pin-code-not-same": "ПИН-код не совпадает.",
+    "statement/pin-code-not-right-digit": "Введите 6-значный PIN-код.",
+    "statement/pin-code-not-number-type": "Введите только цифры.",
+    "statement/pin-code-already-set": "PIN-код уже установлен.",
+    "statement/pin-code-is-not-registered": "PIN-код не подтвержден.",
+    "statement/pin-code-is-invalid": "PIN-код недействителен.",
+    "statement/old-pincode-new-pincode-should-be-different": "Новый PIN-код должен отличаться от старого..",
+    "statement/password-not-valid": "Пароли не совпадают.",
+    "statement/active-order-left": "Есть открытый ордер.",
+    "statement/transfer-left": "Ввод или вывод средств в процессе.",
+    "statement/too-many-asset": "У вас слишком много активов для закрытия аккаунта.",
+    "statement/owner-not-same": "Владелец подтвержденного номера телефона не совпадает с владельцем зарегистрированного номера телефона.",
+    "statement/need-to-register-phone-first": "Требуется регистрация мобильного телефона.",
+    "statement/need-to-register-bank-account": "Вы можете продолжить после регистрации банковского счета.",
+    "statement/existence-of-pending-krw-deposit": "*Есть история ожидания депозита в KRW *",
+    "statement/provided-time-to-provide-pincode-is-expired": "Время ввода PIN-кода истекло."
+  },
+  "ExchangeScreen": {
+    "title": "Биржа",
+    "search_symbol": "Поиск",
+    "total_buy_amount": "Общая сумма покупок",
+    "total_est_value": "Общий рейтинг",
+    "total_profit_and_loss": "Прибыль",
+    "total_profit_and_loss_percentage": "Рентабельность",
+    "favorite": "Любимые монеты",
+    "symbol_name": "Имя",
+    "close_price": "Текущая цена",
+    "change_rate": "Изменение",
+    "volume_24h": "Объем"
+  },
+  "LoginScreen": {
+    "email": "Введите адрес электронной почты",
+    "password": "Введите пароль",
+    "to_login": "Войти",
+    "to_reset_password": "Найти пароль",
+    "to_sign_up": "Зарегестрироваться",
+    "set_pin_code_first": "Вы можете войти в систему после установки ПИН-кода.",
+    "welcome": "Добро пожадовать на биржу Xignal."
+  },
+  "PinLoginScreen": {
+    "login": "Войти",
+    "check_your_address": "Проверьте адрес сайта, к которому вы в настоящее время обращаетесь."
+  },
+  "SignupScreen": {
+    "signup": "Создать аккаунт",
+    "native": "Кореец",
+    "foreigner": "Иностранец",
+    "email": "Адрес электронной почты",
+    "password": "Пароль",
+    "password_confirm": "Подтвердите пароль",
+    "referral": "Реферальный код (опцианально)",
+    "placeholder_email": "Введите свой адрес электронной почты правильно.",
+    "placeholder_password": "Используйте не менее 8 символов, включая буквы, цифры и символы.",
+    "placeholder_password_confirm": "подтвердите пароль.",
+    "agreement_terms": "Я прочитал и принимаю <0> условия использования </0>.",
+    "require": "[Обязательно]",
+    "option": "[Опцианально]",
+    "agreement_marketing": "Я согласен получать уведомления о маркетинге и событиях.",
+    "agreement_privacy": "Я прочитал и принимаю <0> политику конфиденциальности </0>.",
+    "agreement_collection": "Я прочитал и согласен с <0> сбором и использованием личной информации </0>.",
+    "to_sign_up": "Личная регистрация",
+    "is_already_signed_up": "Уже есть аккаунт?",
+    "to_login": "Войти",
+
+    "validation_length": "От 8 до 50 символов",
+    "validation_case": "Пароль должен содержать заглавные и строчные буквы",
+    "validation_special": "Один специальный символ",
+    "validation_number": "Цифры"
+  },
+  "TradingPairScreen": {
+    "24h_diff": "Изменение 24ч"
+  },
+  "BalanceScreen": {
+    "title": "Баланс",
+    "search_symbol": "Поиск",
+    "hold_balance": "Мои",
+    "total_balance": "Всего",
+    "coin": "Монета",
+    "balance": "Баланс",
+    "weight": "Доля",
+    "status": "Статус"
+  },
+  "BalanceDetailScreen": {
+    "title": "Ввод / Вывод",
+    "balance": "Активы",
+    "liquid": "Доступно",
+    "to_deposit": "Ввод",
+    "to_withdraw": "Вывод",
+    "history": "История",
+    "evaluated": "Стоимость",
+    "pending_withdrawal_amount": "В ожидании на вывод",
+    "pending_order_amount": "Сумма ордера в ожидании"
+  },
+  "InvestmentScreen": {
+    "title": "Мои сделки",
+    "tab_balance": "Баланс",
+    "tab_history": "История",
+    "tab_placed_orders": "Ордера"
+  },
+  "NoticeDetailScreen": {
+    "title": "Уведомление",
+    "notice": "Объявление",
+    "token_sale": "Продажа",
+    "listing": "Листинг",
+    "fixed_income": "Проценты по депозиту",
+    "event": "Акции",
+    "maintenance": "Техническое обслуживание"
+  },
+  "NoticeListScreen": {
+    "title": "Уведомление",
+    "notice": "Объявление",
+    "token_sale": "Продажа",
+    "listing": "Листинг",
+    "fixed_income": "Проценты по депозиту",
+    "event": "Акции",
+    "maintenance": "Техническое обслуживание",
+    "search": "Поиск"
+  },
+  "FAQScreen": {
+    "title": "FAQ"
+  },
+  "PrivacyScreen": {
+    "title": "Политика конфиденциальности"
+  },
+  "TermsScreen": {
+    "title": "Условия использования"
+  },
+  "GuideScreen": {
+    "title": "Использование информации"
+  },
+  "UserInfoScreen": {
+    "title": "Моя страница",
+    "user_info": "Профиль",
+    "security": "Безопасность",
+    "access_management": "История входов"
+  },
+  "UserScreen": {
+    "title": "Профиль",
+    "email": "Электронная почта",
+    "security_level": "Уровень верификации",
+    "level": "Верификация",
+    "user_info": "Профиль",
+    "notice": "Объявление",
+    "FAQ": "FAQ",
+    "support": "Поддержка",
+    "listing_support": "Поддержка листинга",
+    "about": "Про нас",
+    "about_company": "Информация",
+    "terms": "Условия и политика",
+    "privacy": "Политика конфиденциальности",
+    "guide": "Использование информации",
+    "app_version": "Приложение",
+    "logout": "Выйти",
+    "login": "Войти",
+    "are_you_sure_to_logout": "Вы действительно хотите выйти?",
+    "company-number": "Регистрационный номер компании: ",
+    "company": "Название компании: ",
+    "ceo": "CEO: ",
+    "customer-service-time": "Поддержка: ",
+    "address": "Адрес",
+    "listing": "Запрос на листинг и партнерство: ",
+    "tel": "тел. ",
+    "access_management": "История входов",
+    "referral": "Реферальная программа",
+    "set_locale": "Языковые настройки",
+    "resign": "Удалить учетную запись"
+  },
+  "CryptoDeposit": {
+    "deposit_address_created": "Адрес ввода средств успешно создан.",
+    "deposit_address_copied": "Адрес ввода средств  скопирован в буфер обмена.",
+    "deposit_paused": "{{symbol}} ввод средств в ожидании.",
+    "my_deposit_address": "Вы можете внести {{symbol}} на указанный ниже адрес.",
+    "copy_address": "Копировать адрес",
+    "instruction_deposit": "Инструкции по вводу средств",
+    "you_can_deposit_only_symbol_to_above_address": "- По этому адресу ввод доступен ТОЛЬКО для {{symbol}. Другие активы, отправленные на этот адрес, возврату не подлежат.",
+    "coins_will_be_deposited_after_few_confirm": "- Средства поступят после  {{confirmation}} подтверждений. Процесс занимает от 10 до 30 минут.",
+    "require_minimum_amount": "- {{amount}} {{symbol}}  - минимальная сумма для ввода средств. Сумма ниже минимальной обработке не подлежит.",
+    "create_address_text": "Для вывода криптовалюты \n nвы должны сначала получить адрес.",
+    "my_coin_deposit_address": "Мой адрес кошелька",
+    "create_address_guide": "Нажмите на кнопку, чтобы создать кошелек для ввода средств.​",
+    "min_deposit_amount": "Минимальная сумма для ввода <0>{{minAmount}} {{symbol}}</0>."
+  },
+  "CryptoWithdrawal": {
+    "sended_withdraw_confirm_mail": "На ваш зарегистрированный адрес электронной почты было отправлено письмо с подтверждением вывода средств.",
+    "withdraw_paused": "Вывод {{symbol}} в настоящее время приостановлен.",
+    "withdrawal_address": "Вывод",
+    "withdrawal_address_placeholder": "Введите адрес кошелька.",
+    "withdrawal_amount": "Сумма вывода",
+    "withdrawal_amount_placeholder": "Введите сумму для вывода средеств.",
+    "withdrawal_amount_overflow": "Сумма вывода превышает лимит.",
+    "otp_code": "OTP",
+    "otp_code_placeholder": "Введите 6-значный OTP-код.",
+    "request_withdraw": "Запрос на вывод средств",
+    "max": "Макс",
+
+    "daily_limit": "Ежедневный макс. лимит",
+    "daily_remaining_limit": "Ежедневный доступный вывод средств",
+    "withdrawal_fee": "Комиссия за снятие средств (включая налоги)",
+    "total_withdrawal": "Общая сумма (включая комиссию)​",
+
+    "create_address": "Создать адрес",
+    "create_address_text": "Для вывода криптовалюты\nсначала необходимо получить адрес.",
+    "instruction_withdrawal": "Инструкции по выводу средств",
+    "instructions": {
+      "first": "- Вы не можете отменить вывод средств. Пожалуйста, будьте внимательны и осторожны.",
+      "second": "- {{symbol}}  можно вывести ТОЛЬКО на {{symbol}}  кошелек. {{exchangeName}} не несет ответственности за ваши действия.",
+      "third": "- После запроса на вывод, процесс вывода {{symbol}} находится в блокчейне. Мы ничем не сможем помочь в этом процессе."
+    },
+
+    "warning":{
+      "less": "Withdrawal amount is less than minimum withdrawal amount.",
+      "over": "Withdrawal amount is more than available withdrawal amount.",
+      "exceed": "Withdrawal amount exceeded daily withdrawal limit."
+    },
+
+    "step": {
+      "first": "STEP 1. Введите сумму для вывода средеств. (Минимальная сумма: {{minAmount}} {{symbol}})",
+      "second": "STEP 2. Введите адрес кошелька",
+      "third": "STEP 3. Введите 6-значный OTP-код"
+    }
+  },
+  "CryptoHistory": {
+    "status_deposit_pending": "Ввод средств в ожидании",
+    "status_deposit_completed": "Ввод средств завершен",
+    "status_withdrawal_pending": "Требуется подтверждение электронной почты",
+    "status_withdrawal_email_verified": "Вывод средств в ожидании",
+    "status_withdrawal_processing": "Вывод средств обрабатывается",
+    "status_withdrawal_cancelled": "Вывод средств отменен",
+    "status_withdrawal_completed": "Вывод средств завершен",
+    "no_history_deposit": "История ввода средств отсутствует",
+    "no_history_withdrawal": "История вывода средств отсутствует",
+    "no_history": "История вывода / ввода средств отсутствует",
+    "status": "Статус",
+    "trade_id": "ID транзакции",
+    "total": "Всего",
+    "deposit": "Ввод",
+    "withdrawal": "Вывод",
+    "more": "Более"
+  },
+  "FiatDeposit": {
+    "check_instruction": "# Обязательно проверьте следующее перед внесением KRW.",
+    "deposit_confirm_instruction": "1.  Правильно ли вы написали свое имя + код депозита в поле 'получатель'? (Пример: Иван Иванов1234)\n\n2. Вы внесли ту же сумму, что и запрошенная сумма депозита?\n\n3. Вы вносите средства на тот же счет, что и на счет, зарегистрированный в аккаунте биржи?\n\n4. У вас есть счет в том же банке и то же имя, зарегистрированное на счете биржи?\n\nЕсли вышеизложенное не применимо, для внесения депозита в южнокорейских вон может потребоваться более недели, поэтому, пожалуйста, проверяйте это при внесении депозита!",
+    "placed_deposit_exist_label": "*Имеется история незавершенных вводов средств в KRW*",
+    "placed_deposit_exist_statement": "1. Ввод средств в KRW в ожидании. \n\n2. Запрос на ввод средств в KRW. Выбирите [Завершить] или [Отменить]",
+    "deposit_paused": "Ввод средств {{symbol}} в настоящее время приостановлен.",
+    "need_verify_account": "Вы можете пользоваться после проверки учетной записи.",
+    "verify_account": "Верификация",
+    "my_account_number": "Подтверждение учетной записи с настоящем именем ",
+    "reserved_deposit_amount": "Сумма ввода средств",
+    "min_deposit_amount": "Минимальная сумма ввода средств: ",
+    "deposit_reserve": "Бронирование для ввода средств",
+    "deposit_instruction": "Примечания к выводу средств",
+    "you_must_deposit_from_your_account": "1. Убедитесь, что вы осуществили ввод средств со своего зарегистрированного счета. (<0>Ввод средств с Kakao Pay, Toss, Pink запрещен</0>)",
+    "please_deposit_same_amount_you_request": "2. Пожалуйста, внесите ту же сумму, что и запрошенная. (Если вы подаете заявку на 1 миллион вон, вы можете внести 1 миллион вон, и вы не можете внести в рассрочку)",
+    "please_input_your_name_and_deposit_code": "3. Пожалуйста, напишите код ввода средств вместе с вашим именем. (Укажите получателя, банковскую книжку получателя и напишите код ввода средств вместе с именем человека в памятке банковской книжки получателя)",
+    "please_contact_cs": "5. В случае задержки ввода средств, пожалуйста, свяжитесь со службой поддержки."
+  },
+  "FiatHistory": {
+    "status_deposit_pending": "Депозит в ожидании",
+    "status_deposit_bank_invalid": "Несоответствие банка",
+    "status_deposit_amount_invalid": "Несоответствие суммы",
+    "status_deposit_expired": "Срок действия истек",
+    "status_deposit_completed": "Ввод средств завершен",
+    "status_deposit_cancelled": "Ввод средств отменен",
+    "status_withdrawal_pending": "Ожидается подтверждения электронной почте",
+    "status_withdrawal_email_verified": "Электронная почта подтверждена",
+    "status_withdrawal_processing": "Вывод средств обрабатывается",
+    "status_withdrawal_fail": "Электронная почта подтверждена",
+    "status_withdrawal_completed": "Вывод средств завершен",
+    "status_withdrawal_cancelled": "Вывод средств отменен",
+    "no_history_deposit": "История ввода средств отсутствует.",
+    "no_history_withdrawal": "История вывода средств отсутствует.",
+    "no_history": "История вывода / ввода средств отсутствует",
+    "code": "Код вкладчика: {{txCode}}",
+    "otp_code_placeholder": "Введите OTP"
+  },
+  "FiatWithdrawal": {
+    "sended_withdrawal_confirm_mail": "На ваш зарегистрированный адрес электронной почты отправлено электронное письмо с подтверждением вывода средств.",
+    "withdrawal_paused": "Вывод {{symbol}} в настоящее время приостановлен",
+    "need_verify_account": "Вы можете пользоваться после проверки учетной записи.",
+    "verify_account": "Верификация",
+    "withdrawal_amount": "Сумма вывода средств",
+    "otp_code": "OTP",
+    "otp_code_placeholder": "Введите OTP",
+    "min_withdrawal_amount": "Минимальная сумма вывода средств: ",
+    "fee": "Комиссия: ",
+    "total_withdrawal_amount": "Общая сумма вывода средств: ",
+    "request_withdrawal": "Запрос на вывод средств",
+    "withdrawal_instruction": "Инструкции по выводу средств",
+    "once_limit": "- Лимит разового вывода {{amount}} {{symbol}}",
+    "daily_limit": "- Ежедневный лимит вывода  {{amount}} {{symbol}}",
+    "less_than_min_withdrawal_amount": "Меньше минимальной суммы вывода.",
+    "withdrawal_amount_overflow": "Вы превысили сумму вывода средств."
+  },
+  "InvestmentHistory": {
+    "buy": "Купить",
+    "sell": "Продать",
+    "withdrawal": "Вывод",
+    "deposit": "Ввод",
+    "give_out": "Оплатить",
+    "take_away": "Собрать",
+    "ieo": "IEO",
+    "staking": "Стейкинг",
+    "staking_reward": "Награда за стейкинг",
+    "no_history": "Данные не найдены.",
+    "time": "Время",
+    "coin": "Криптовалюта",
+    "market": "Маркет",
+    "side": "Тип транзакции",
+    "volume": "Объем транзакции",
+    "price": "Цена транзакции",
+    "value": "Количество транзакции",
+    "fee": "Комиссия",
+    "total": "Всего"
+  },
+  "PlacedOrder": {
+    "no_history": "Записей не найдено.",
+    "cancel_order": "Отменить",
+    "time": "Дата",
+    "coin": "Пара",
+    "market": "Маркет",
+    "side": "Сторона",
+    "buy": "Купить",
+    "sell": "Продать",
+    "volume": "Количество",
+    "volume_remaining": "Осталось",
+    "volume_filled": "Заполнено",
+    "order_price": "Цена",
+    "cancel": "Отмена"
+  },
+  "Portfolio": {
+    "no_history": "Записей не найдено.",
+    "evaluated_price": "Цена",
+    "change_rate": "Изменение",
+    "balance": "Объем",
+    "avg_buy_price": "Средняя цена покупки",
+    "evaluated_amount": "Количество",
+    "buy_price": "Цена",
+    "total_balance": "Всего",
+    "fiat_balance": "Доступно",
+    "total_buy": "Всего",
+    "total_evaluated": "Всего",
+    "total_evaluated_balance": "Доступно"
+  },
+  "TradingPairHistory": {
+    "no_history": "Записей не найдено.",
+    "trading_pair": "Пара",
+    "side": "Сторона",
+    "price": "Цена",
+    "volume": "Количесвто",
+    "traded": "Исполнено",
+    "not_traded": "Не исполнено",
+    "cancel": "Отменить"
+  },
+  "TradingPairLimit": {
+    "init": "Сбросить",
+    "buy": "Купить",
+    "sell": "Продать",
+    "to_login": "Войти",
+    "price": "Цена",
+    "volume": "Количество",
+    "amount": "Всего",
+    "available": "Доступно",
+    "fee": "Комиссия",
+    "min_order_amount": "Минимальная сумма ордера",
+    "buy_price": "Цена",
+    "buy_volume": "Количество",
+    "buy_available": "Доступно",
+    "sell_price": "Цена",
+    "sell_volume": "Количество",
+    "sell_available": "Доступно"
+  },
+  "TradingInfo":{
+    "location" : "location"
+  },
+  "TradingPairTraded": {
+    "no_history": "Записей не найдено.",
+    "time": "Дата",
+    "price": "Цена",
+    "volume": "Количество"
+  },
+  "TradingPairOrders": {
+    "no_history": "Записей не найдено.",
+    "placed": "Не исполнено",
+    "filled": "Заполнено",
+    "partially_filled": "Частично заполнено",
+    "reserved": "Зарезервировано",
+    "cancelled": "Отменено",
+    "buy": "Купить",
+    "sell": "Продать",
+    "time": "Дата",
+    "pair": "Пара",
+    "side": "Сторона",
+    "status": "Статус",
+    "price": "Цена",
+    "volume": "Количество",
+    "amount": "Всего"
+  },
+  "TradingPairTradeHistory": {
+    "order_history": "История ордеров",
+    "traded_history": "История транзакций"
+  },
+  "TradingPairTrades": {
+    "no_history": "Записей не найдено.",
+    "buy": "Купить",
+    "sell": "Продать",
+    "time": "Дата",
+    "symbol": "Пара",
+    "type": "Тип",
+    "price": "Цена",
+    "volume": "Количество",
+    "amount": "Всего"
+  },
+  "ControlPad": {
+    "buy": "Купить",
+    "sell": "Продать",
+    "placed": "Не исполнено",
+    "amount-can-not-be-more-than-available": "Сумма ордера не может быть больше доступной суммы.",
+    "order_successful": "Ваш ордер успешно размещен.",
+    "limit": "Лимит",
+    "market": "Маркет"
+  },
+  "OrderBook": {
+    "price": "Цена",
+    "volume": "Количество",
+    "remaining_sell": "Оставшаяся сумма продажи",
+    "remaining_buy": "Оставшаяся сумма покупки"
+  },
+  "TradingPairMenuTab": {
+    "order": "Ордер",
+    "chart": "Чарт",
+    "trade": "Баланс",
+    "history": "История",
+    "info": "Info"
+  },
+  "AccessManagement": {
+    "logout_all_successful": "Вы вышли со всех устройств.",
+    "location": "Локация",
+    "os": "Операционная система",
+    "browser": "Браузер",
+    "ip": "IP",
+    "time": "Дата",
+    "access_management": "История входов",
+    "instruction": "Если вы не совершали входа в систему,\n <0>то нажмите Выйти со всех устройств</0>.",
+    "logout_button": "Выйти со всех устройств"
+  },
+  "SecurityScreen": {
+    "sended_verification_mail": "Ваше электронное письмо с подтверждением было успешно отправлено.",
+    "verify_email": "Подтверждение электронной почты",
+    "verify": "Подтвердить",
+    "verify_pin": "PIN code",
+    "verified": "Верификация завершена",
+    "reset": "Сбросить",
+    "verify_phone": "Номер телефона",
+    "account_info": "Информация об учетной записи",
+    "verify_kyc": "KYC",
+    "kyc_pending": "В ожидании",
+    "kyc_verified": "Завершено",
+    "kyc_denied": "Отклонено",
+    "verify_center": "Посетить центр",
+    "level": "Level",
+    "security": "Безопасность",
+    "current_security_level": "Текущий уровень безопасности <0>уровень {{level}} уровень</0>",
+    "additional_security_guide": "Дополнительная инструкция по верификации",
+    "otp_verified": "OTP подтвержден",
+    "otp_verify": "OTP",
+    "otp_instruction": "(KRW and coin withdrawal are restricted when OTP is inactive.)",
+    "verify_residence": "Местожительство",
+    "limit_label": "Лимит вывода средств",
+    "security_step": "Безопасность",
+    "security_guide": "Если вы продолжите верификацию безопасности, лимит вывода средств увеличится вместе с повышением уровня безопасности.\nЕсли вам нужно больший объем вывода средств, выполните проверку безопасности ниже."
+  },
+  "UserInfo": {
+    "nickname_changed": "Ваш никнейм изменен.",
+    "agree_marketing": "Я согласен получать уведомления о маркетинге и событиях.",
+    "disagree_marketing": "Вы не согласны получать уведомления о маркетинге и событиях.",
+    "agree_staking_service": "Я согласен с использованием сервиса стейкинг.",
+    "disagree_staking_service": "Вы не согласны с использованием сервиса стейкинг.",
+    "user_info": "Профиль",
+    "email": "Электронная почта",
+    "nickname": "Никнейм",
+    "change_nickname": "Изменить никнейм",
+    "nickname_role": "от 2 до 12 символов, спецсимволы/пробелы не допускаются, никнейм можно изменить по истечении 6 месяцев с момента смены.",
+    "name": "Имя",
+    "phone": "Номер телефона",
+    "security": "Безопасность",
+    "level": "Уровень  {{level}}",
+    "service_agreement": "Сервисное соглашение",
+    "accept_event_message_agreement": "Согласие на получение информации о событиях",
+    "agree": "Согласен",
+    "disagree": "Не согласен",
+    "staking_service_agreement": "Согласие на сервис стейкинг"
+  },
+  "DepositNumberValidation": {
+    "deposit_guide": "Руководство по вводу средств",
+    "please_deposit_to_this_account": "Пожалуйста, внесите <0>{{amount}}</0>KRW на указанный ниже счет.",
+    "bank_name": "Банк: ",
+    "account_number": "Номер счета: ",
+    "account_holder": "Владелец счета: ",
+    "tx_code": "Номер входящей сберкнижки: ",
+    "please_input_tx_code": "Обязательно введите код ввода средств <0>{{txCode}}</0> в [Информация о входящей сберкнижке]. Если вы не введете код, ввода средств не будет обработан."
+  },
+  "VerifyAccount": {
+    "account_verify_success": "Проверка аккаунта прошла успешно.",
+    "account_verify_failed": "Не удалось подтвердить аккаунт.",
+    "please_register_account": "Зарегистрируйте аккаунт под настоящим именем.",
+    "bank": "Банк",
+    "account": "Аккаунт",
+    "account_placeholder": "Введите номер счета",
+    "verify_account": "Подтвердите свой банковский счет"
+  },
+  "VerifyDefaultModal": {
+    "email_verification": "Верификация электронной почты",
+    "pin_code_verification": "Подтвердить PIN-код",
+    "pin_code_reset": "Сбросить PIN-код",
+    "identity_verification": "Верификация личности",
+    "account_verification": "Верификация учетной записи",
+    "kyc_verification": "Верификация KYC",
+    "otp_register": "Ввести OTP код",
+    "otp_verification": "Верификация OTP",
+    "residence_verification": "Верификация местажительства"
+  },
+  "VerifyKYC": {
+    "title": "{{exchange}}осуществляет обязательный процесс проверки личности для безопасных транзакций клиентов.",
+    "agree_privacy_collection": "[Обязательно] Я прочитал и согласен с <0>Политикой сбора и использования личной информации</0>.",
+    "privacy": "Политика конфиденциальности"
+  },
+  "VerifyKYCDetail": {
+    "kyc_register_success": "Копия вашего ID успешно зарегистрирована.",
+    "selfie_register_success": "Ваша фотография успешно зарегистрирована.",
+    "pending": "Идет обработка.",
+    "photo_uploaded": "Загрузить фото",
+    "register_id_card": "Зарегистрируйте копию своего удостоверения личности",
+    "id_card_guide_1": "\u2022 При фотографировании вашего удостоверения личности мы сообщаем вам, что ваш запрос будет отклонен, если вы не укажете последние 6 цифр своего регистрационного номера резидента, водительского удостоверения, паспорта и регистрационного номера иностранца.",
+    "id_card_guide_2": "\u2022 Напишите на пямятке цель аутентификации, адрес электронной почты для аутентификации и примечания к дате запроса как указано в примере. Пожалуйста, прикрепите его и сделайте снимок.",
+    "id_card_guide_3": "\u2022 Удостоверение личности, регистрационная карта резидента, водительские права, паспорт",
+    "take_photo": "Сделать фото",
+    "select_from_album": "Выбрать из альбома",
+    "take_selfie": "Зарегистрировать селфи",
+    "selfie_guide_1": "\u2022 При фотографировании вашего удостоверения личности мы сообщаем вам, что ваш запрос будет отклонен, если вы не укажете последние 6 цифр своего регистрационного номера резидента, водительского удостоверения, паспорта и регистрационного номера иностранца.",
+    "selfie_guide_2": "\u2022 Напишите цель аутентификации, адрес электронной почты для аутентификации и примечания к дате запроса как указано в примере. Пожалуйста, прикрепите его и сделайте снимок.",
+    "selfie_guide_3": "\u2022 Пожалуйста, сделайте фото, чтобы показать свое удостоверение личности, памятку и свое лицо."
+  },
+  "VerifyOTP": {
+    "title": "После запуска приложения аутентификации OTP отсканируйте приведенный ниже QR-код с помощью своего смартфона.\nВведите 16-значный код.",
+    "code_number": "16-значный кодовый номер",
+    "next_step": "Следующий шаг"
+  },
+  "VerifyOTPConfirm": {
+    "otp_register_success": "Проверка OTP завершена",
+    "title": "Пожалуйста, введите 6-значный код, сгенерированный в приложении OTP.",
+    "otp_placeholder": "Пожалуйста, введите 6-значный код, сгенерированный в приложении OTP."
+  },
+  "VerifyPhone": {
+    "title": "{{exchange}}  осуществляет применяет обязательный процесс проверки личности для безопасных транзакций клиентов.",
+    "agree_privacy_collection": "[Обязательно] Я прочитал и согласен с <0>Политикой сбора и использования личной информации</0>.",
+    "privacy": "Политика конфиденциальности",
+    "next_step": "Следующий уровень",
+    "placeholder": "Введите свой номер мобильного телефона.",
+    "title_verify": "Введите номер подтверждения вашего мобильного телефона.",
+    "placeholder_verify": "6-значный код верификации",
+    "select_country": "- Выберите страну.",
+    "enter_phone_number": "- Введите номер вашего мобильного телефона."
+  },
+  "VerifyPin": {
+    "register_pin": "Зарегистрировать ПИН-код"
+  },
+  "VerifyPinReset": {
+    "reset_pin": "Сбросить ПИН-код",
+    "pin_register_success": "Вы успешно изменили свой PIN-код."
+  },
+  "VerifyResidence": {
+    "title": "{{exchange}} осуществляет применяет обязательный процесс проверки личности для безопасных транзакций клиентов.",
+    "privacy": "Политика конфиденциальности",
+    "agree_privacy_collection": "[Обязательно] Я прочитал и согласен с <0>Политикой сбора и использования личной информации</0>.",
+    "guide": "1. Загрузите фотографию паспорта и один из следующих документов, подтверждающих ваше место жительства, в виде файла:\u200B\n\nсчет за коммунальные услуги (за газ, воду или электричество)\u200B\n\nсправка об уплате налогов\u200B\n\nсправка с места жительства, выданная государственным органом\u200B\n\n2. Паспорт и документ, подтверждающий место жительства, должны быть показаны вместе на одной фотографии.\u200B\n\n3. Документ должен быть выдан в течение последних 90 дней (включая дату выдачи).\u200B\n\n4. Имя в паспорте и имя в документе, подтверждающем местожительства, должны совпадать.\u200B\n\n5. Имя и адрес должны быть указаны точно и отображены на фотографии.",
+    "upload_text": "Загрузите фотографию паспорта для подтверждения места жительства.",
+    "upload_button": "Загрузить",
+    "upload_button_photo": "Загрузить фото",
+    "address_text": "Введите ваш адрес проживания.",
+    "placeholder": "Адрес",
+    "confirm_message": "Файл для подтверждения места жительства был загружен."
+  },
+  "BasicPin": {
+    "please_input_pin": "Введите PIN-код."
+  },
+  "NewPin": {
+    "pin_code_not_same": "PIN-код не совпадает.",
+    "new_pin": "Новый PIN-код",
+    "new_pin_confirm": "Новый PIN-код подтвержден",
+    "pin_role": "* Повторение одного и того же числа из 4 или более цифр (пример 1111), 4 или более последовательных цифр (пример 1234), число, совпадающее с личной информацией, например 4 или более последовательных номера в обратном порядке\n(пример, 4321), дата рождения, номер телефона и т. д., является комбинацией, которую нельзя использовать в качестве PIN-кода."
+  },
+  "ResetPin": {
+    "pin_code_not_same": "PIN-код не совпадает.",
+    "current_pin_code": "Текущий PIN-код",
+    "new_pin": "Новый PIN-код",
+    "new_pin_confirm": "Новый PIN-код подтвержден",
+    "pin_role": "* Повторение одного и того же числа из 4 или более цифр (пример 1111), 4 или более последовательных цифр (пример 1234), число, совпадающее с личной информацией, например 4 или более последовательных номера в обратном порядке\n(пример, 4321), дата рождения, номер телефона и т. д., является комбинацией, которую нельзя использовать в качестве PIN-кода."
+  },
+  "AccountInfo": {
+    "account_info": "Информация об учетной записи",
+    "bank_name": "Банк",
+    "account_number": "Банковский счет",
+    "account_holder": "Владелец счета"
+  },
+  "TradingPairRightHeader": {
+    "deleted_from_favorites": "Монета была удалена из интересующих.",
+    "added_to_favorites": "Добавлено в интерисующие монеты."
+  },
+  "Popup": {
+    "do_not_open_this_window_for_24_hours": "Не открывать это окно в течение 24 часов"
+  },
+  "RequestResetPassword": {
+    "title": "Сброс пароля",
+    "email": "Электронная почта",
+    "send_email": "Письмо было отправлено.",
+    "please_input_your_email": "Введите Ваш адрес электронной почты.",
+    "invalid_input": "Формат электронной почты недействителен.",
+    "request_email_to_reset_password": "Запрос письма для сброса пароля​",
+    "please_input_your_email_for_reset": "Введите зарегистрированный адрес электронной почты."
+  },
+  "EmailVerificationScreen": {
+    "title": "Верификация",
+    "send_email_to_yours": "На адрес {{email}}, указанный вами при регистрации, отправлено письмо с подтверждением.",
+    "guide": "Чтобы использовать эту страницу, подтвердите свой адрес электронной почты после проверки письма с подтверждением. Если вы не получили электронное письмо с подтверждением, нажмите кнопку ниже.",
+    "resend": "Повторно отправить письмо с подтверждением"
+  },
+  "OtpLoginScreen": {
+    "title": "Введите OTP",
+    "guide": "Если вы забыли OTP, обратитесь в службу поддержки.",
+    "cs": "Запрос на сброс OTP"
+  },
+  "InputSecretScreen": {
+    "title": "Enter secret number",
+    "content": "Please enter 6 digit secret number.",
+    "guide": "Please enter 6 digit secret number.",
+    "cs": "Inquiry for secret number reset"
+  },
+  "LocaleModal": {
+    "title": "Языковые настройки",
+    "change": "Изменить"
+  },
+  "ExchangeHeader": {
+    "search_symbol": "Поиск"
+  },
+  "TradingPairSelector": {
+    "title": "Список торговых пар",
+    "favorites": "Интересующие монеты",
+    "no_data": "Записей не найдено."
+  },
+  "ReferralScreen": {
+    "title": "Реферальная программа",
+    "welcome": "Приглашайте друзей, и зарабатывайте криптовалюту вместе!\nПолучай <0>до {{defaultReferralRate}}%</0>с комиссий каждый раз, когда твой друг совершает сделки на Xignal.\n\nБазовая ставка комиссии: {{defaultReferralRate}}%",
+    "my_default_referral_title": "Реферальный код по умолчанию",
+    "code": "Реферальный код",
+    "invite_link": "Реферальная ссылка",
+    "memo": "Заметка",
+    "rate": "Вы получите\nДруг получит",
+    "generate_referral_link": "Реферальная ссылка",
+    "total_friends": "Количество друзей: {{friends}}",
+    "placeholder_code": "Реферальный код",
+    "placeholder_memo": "Заметка",
+    "set_commission": "Установить процент кэшбэка для друга.",
+    "you_receive": "Вы получите: {{rate}}%",
+    "friend_receive": "Друг получит: {{rate}}%",
+    "create": "Реферальная ссылка",
+    "referral_link_list": "Список реферальных ссылок",
+    "not_exist_default_code": "Реферального кода не существует. Сначала создайте реферальный код.",
+    "no_data": "Реферальной ссылки не существует.",
+    "edit": "Изменить",
+    "modal": {
+      "title": "Реферальная программа",
+      "edit_title": "Изменить заметку",
+      "placeholder_edit": "Введите содержимое для редактирования.",
+      "set_default": "Установить по умолчанию",
+      "copy": "Копировать",
+      "delete": "Удалить",
+      "friends_list": "Список друзей",
+      "created": "Дата",
+      "email": "Электронная почта друга",
+      "no_data": "Записей не найдено."
+    },
+    "list": {
+      "code": "Реферальный код",
+      "rate": "Вы получите\nДруг получит",
+      "memo": "Заметка",
+      "friends": "Количество друзей"
+    },
+    "ErrorHelper": {
+      "generated_referral_link": "Реферальная ссылка успешно создана. Проверьте список ссылок ниже.",
+      "code_digit_limit": "Реферальный код должен состоять более чем из 4 и менее чем из 10 букв и цифр.",
+      "memo_digit_limit": "Можно ввести не более 50 символов.",
+      "default_referral_code_changed": "Реферальный код по умолчанию изменен.",
+      "referral_code_has_been_deleted": "Реферальная ссылка удалена.​",
+      "copied": "Код скопирован в буфер обмена",
+      "memo_changed": "Заметка изменена."
+    }
+  },
+  "Deactivate": {
+    "title": "Удаление аккаунта",
+    "warning": {
+      "greater-balance": "* Общая сумма активов превышает 1 USDT.",
+      "pending-trade": "* У вас имеется незавершенная транзакция.",
+      "pending-transaction": "* У вас имеется незавершенная операция по вводу или выводу средств."
+    },
+    "instructions": {
+      "greater-balance": "1. Общая сумма ваших активов, при конвертации в USDT, превышает 1 USDT.",
+      "pending-trade": "2. Нахождение активов в процессе ввода и вывода.",
+      "pending-transaction": "3. Если есть транзакция в процессе.",
+      "terminating-account-is-not-possible": "Удаление аккаунта невозможно, если совпадает одно или несколько из вышеперечисленных условий.",
+      "user-balance": "Общая сумма активов при конвертации в USDT : {{amount}} {{symbol}}"
+    },
+    "terminate-account": "Удалить аккаунт",
+    "request-completed": "Аккаунт удален",
+    "request-completed-greeting": "Ваш запрос на удаление аккаунта успешно завершен. Благодарим за использование.",
+    "reasons": {
+      "select": "Пожалуйста, укажите причину удаления Вашего аккаунта.",
+      "stopped-trade": "Приостановка инвестиций в криптовалюту",
+      "unsupported-coin": "Транзакция монеты не поддерживается",
+      "unfriendly-web": "Неудобно пользоваться сайтом",
+      "cs-complaint": "Плохая поддержка клиентов",
+      "etc": "Другое (Опишите)"
+    },
+    "please-select-terminating-reason": "Пожалуйста, укажите причину удаления Вашего аккаунта.",
+    "terminating-reason": "Опишите причину",
+    "agree-above-and-proceed-terminate": "Я согласен с вышеизложенным и хочу удалить свой аккаунт.",
+    "terminate": "Удалить"
+  }
+}
+
