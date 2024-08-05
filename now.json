@@ -16,5 +16,5 @@
         "use": "@now/next"
       }
     ],
-    "regions": ["all"]
+    "regions": ["icn1"]
 }
