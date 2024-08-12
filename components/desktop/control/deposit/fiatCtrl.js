@@ -2,7 +2,8 @@ import React, { useState, useEffect, useMemo } from 'react';
 import Router from 'next/router';
 import styled from 'styled-components';
 import { useStore } from "mobx-store-provider";
-import Select from "react-select";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCopy } from "@fortawesome/free-solid-svg-icons";
 
 import CommonLogo from '../../common/commonLogo';
 import c from "../../common/commonStyle";
@@ -100,7 +101,7 @@ const FiatCtrl = () => {
     <HomeContainer>
 
       <c.Image src="/images/usdt_intro_01.png" style={{ marginTop: '40px', width: '312px' }}></c.Image>
-      <p style={{ fontSize: '20px', color: '#000', lineHeight: '72px' }}>{"계정이 없으시다면?"} &nbsp; <a onClick={() => setMemberShipState(2)} style={{ color: '#0139CC' }}>{'가입하기'}</a></p>
+      <p style={{ fontSize: '20px', color: '#000', lineHeight: '72px' }}>{"Techcom 0234-2345234-234"} &nbsp; <FontAwesomeIcon icon={faCopy} /></p>
       <InputBox>
         <p style={{ width: '100px', textAlign: 'start' }}>
           {'입금 금액'}
