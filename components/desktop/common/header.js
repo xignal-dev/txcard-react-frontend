@@ -79,6 +79,28 @@ const UsdtDeposit = styled.a`
   }
 `;
 
+const ProfileBox = styled.a`
+  border-radius: 50px;
+  // padding: 7px 20px;
+  color: #fff;
+  background-color: #0139CC;
+  font-weight: bold;
+  border: 0px solid #D9D9D9;
+  
+  &:hover{
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+  }  
+  &:active{
+    background-color: #5383FF;
+    color: #fff;
+  }
+  &:focus {
+    outline: none;
+  }
+`;
+
 const Profile = styled.img`
   width: 44px;
   height: 44px;
@@ -164,7 +186,9 @@ const Header = () => {
       </LogoBox>
       <RightMenuBox>
         <UsdtDeposit href={'/deposit?state=1'}>{'USDT Deposit'}</UsdtDeposit>
-        <Profile src={'/images/Profile_01.png'}></Profile>
+        <ProfileBox href={'/mypage'}>
+          <Profile src={'/images/Profile_01.png'}></Profile>
+        </ProfileBox>
         <LangBox onMouseEnter={() => handleMouseEnter('lang')} onMouseLeave={() => handleMouseLeave('lang')}>
           <Language src={'/images/language_01.png'}>
           </Language>

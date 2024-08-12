@@ -1,7 +1,7 @@
 {
-    "name": "smb4u-frontend",
+    "name": "txcard-react-frontend",
     "version": "0.2.0",
-    "description": "smb4u frontend",
+    "description": "travel express service",
     "scripts": {
         "dev": "next -p 8100",
         "build": "cross-env NODE_OPTIONS='--openssl-legacy-provider' next build",
