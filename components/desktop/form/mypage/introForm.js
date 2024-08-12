@@ -156,7 +156,7 @@ const MidMeritBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  border-radius: 5px;
+  border-radius: 10px;
   margin-right: 32px;
   background-color: rgba(0, 0, 0, 100);
   color: #fff;
