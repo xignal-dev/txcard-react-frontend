@@ -56,11 +56,11 @@ export default class MyDocument extends Document {
 					<meta name="twitter:title" content="TRAVEL EXPRESS"/>
 					<meta name="twitter:description" content="Travel Express Card Service"/>
 					<meta name="twitter:image:src" content="https://i.imgur.com/wTAVqy5.jpg"/>
-					<meta name="og:title" content="SMB4U"/>
+					<meta name="og:title" content="TRAVEL EXPRESS"/>
 					<meta name="og:description" content="Travel Express Card Service"/>
 					<meta name="og:image" content="https://i.imgur.com/wTAVqy5.jpg"/>
 					<meta name="og:url" content=""/>
-					<meta name="og:site_name" content="SMB4U"/>
+					<meta name="og:site_name" content="TRAVEL EXPRESS"/>
 					<meta name="og:type" content="website"/>
           {/* <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/> */}
 					<link rel="icon" href="/favicon.png"/>

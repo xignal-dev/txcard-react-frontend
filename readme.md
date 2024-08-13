@@ -36,7 +36,7 @@ https://git-scm.com/download/win
     
 ```bash
 # 깃허브에서 발행한 access-key와 사용자 ID를 사용하여 clone
-$ git clone https://{GIT_HUB_USER_ID:GIT_HUB_ACCESS_KEY}@github.com/smb4u-service/order-node-frontend.git
+$ git clone https://{GIT_HUB_USER_ID:GIT_HUB_ACCESS_KEY}@github.com/xignal-dev/txcard-react-frontend.git
 ```
 
 * nvm(node version manager) 설치
