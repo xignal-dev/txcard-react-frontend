@@ -542,7 +542,7 @@ class ErrorHelper{
 
         if(error_code === 8008) {
             try {
-                stores.alertStore.open(i18n.i18n.t('ErrorHelper/statement/own-wallet-withdrawal-not-allowed', {exchange_name: 'SMB4U'}));
+                stores.alertStore.open(i18n.i18n.t('ErrorHelper/statement/own-wallet-withdrawal-not-allowed', {exchange_name: 'TRAVEL EXPRESS'}));
             } catch (e) {
                 console.log(e);
             }
