@@ -94,7 +94,7 @@ const LoginButton = styled(c.Button)`
 
 const LoginForm = ({setMemberShipState}) => {
 
-  const stores = useStore(Stores);
+  // const stores = useStore(Stores);
   
   
 
@@ -119,6 +119,34 @@ const LoginForm = ({setMemberShipState}) => {
 
   const onChangePw = (e) => {
     setMemberPw(e.target.value);
+  }
+  
+  const onClickSignin = () => {
+    
+    let data = {
+      email: memberId,
+      password: memberPw,
+    }
+    
+    // console.log(data);
+    api.login(data).then((response) => {
+      
+      if(response.status >= 200 && response.status <= 300) {
+        let data = response.data;
+        console.log(data);
+        Stores.authStore.setUserEmail(data.email);
+        Stores.authStore.setAccessToken(data.token.accessToken);
+        Stores.authStore.setRefreshTokenn(data.token.refreshToken);
+        Stores.authStore.authenticate();
+        Router.push({ pathname: '/', });
+        // handleSubmit();
+      }
+    }).catch((error) => {
+      // console.log(error);
+      setMemberPw('');
+      setMemberId('');
+      // setErrorState(1);
+    });
   }
 
   return (
@@ -152,7 +180,7 @@ const LoginForm = ({setMemberShipState}) => {
               onChange={onChangePw} >
             </InputText>
           </InputBox>
-          <LoginButton>{'로그인 하기'}</LoginButton>
+          <LoginButton onClick={() => onClickSignin(2)}>{'로그인 하기'}</LoginButton>
         </LoginBox>
 
         <c.Image src="/images/main_companies.png" style={{ margin: '40px 0 1095.95px 0' }}></c.Image>

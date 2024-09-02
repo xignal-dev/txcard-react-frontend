@@ -181,10 +181,18 @@ const TinyText = styled(c.TinyText)`
 const HomeForm = () => {
 
   const stores = useStore(Stores);
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     const init = async () => {
-      console.log('accessToken', window.localStorage.getItem('accessToken'));
+      // console.log('accessToken', window.localStorage.getItem('accessToken'));
+      await Stores.userStore.getProfile();
+      if(Stores.authStore.authStatus !== 'SUCCESS') {
+        Router.push({ pathname: '/' });
+        return;
+      }
+      console.log(Stores.userStore.profile);
+      setUser(Stores.userStore);
     };
 
     init();
@@ -199,20 +207,20 @@ const HomeForm = () => {
           <Edit>{'EDIT'}</Edit>
         </TopBox>
         <TopBox style={{ alignItems: 'flex-start' }}>
-          <c.SmallText>{'Nick Name'}</c.SmallText>
-          <c.LargeText>{'aaaa***@gmail.com'}</c.LargeText>
+          <c.SmallText>{user.cmName}</c.SmallText>
+          <c.LargeText>{user.cmEmail}</c.LargeText>
           <TopSubBox>
             <TopMiniBox>
               <c.TinyText>{'Email'}</c.TinyText>
-              <c.TinyText>{'aaaa***@gmail.com'}</c.TinyText>
+              <c.TinyText>{user.cmEmail}</c.TinyText>
               <c.TinyText style={{ marginTop: '10px' }}>{'Country Region'}</c.TinyText>
-              <c.TinyText>{'South Korea'}</c.TinyText>
+              <c.TinyText>{user.cmAddress1 === '' ? '-' : user.cmAddress1}</c.TinyText>
             </TopMiniBox>
             <TopMiniBox>
               <c.TinyText>{'Phone'}</c.TinyText>
-              <c.TinyText>{'******345'}</c.TinyText>
+              <c.TinyText>{user.cmTel === '' ? '-' : user.cmTel }</c.TinyText>
               <c.TinyText style={{ marginTop: '10px' }}>{'Grade'}</c.TinyText>
-              <c.TinyText>{'Platinum'}</c.TinyText>
+              <c.TinyText>{user.cmLevel === 1 ? 'Silver' : user.cmLevel === 2 ? 'Platinum' : ''}</c.TinyText>
             </TopMiniBox>
           </TopSubBox>
         </TopBox>
@@ -242,7 +250,7 @@ const HomeForm = () => {
             <c.Image src='/images/txpoint_txpoint_01.png' style={{ width: '126px' }}></c.Image>
             <MidAssetDescBox>
               <c.SmallText>{'TX POINT'}</c.SmallText>
-              <c.NormalText style={{ fontSize: '28px' }}>{'5,000,000'}<span style={{ fontSize: '18px', color: '#ABABAB' }}>{' TX'}</span></c.NormalText>
+              <c.NormalText style={{ fontSize: '28px' }}>{user.cmEpoint}<span style={{ fontSize: '18px', color: '#ABABAB' }}>{' TX'}</span></c.NormalText>
               <c.TinyText style={{ fontSize: '18px', color: '#5383FF' }}>{'≈ 100,000 USDT / 200,000 KRW'}</c.TinyText>
             </MidAssetDescBox>
           </MidAssetBox>

@@ -7,7 +7,7 @@ import { isEmpty } from './utils';
 
 // const CENTRAL_API_ROOT = `http://localhost:8589`;
 // const CENTRAL_API_ROOT = `https://apibiz.linkedkulture.cf`;
-const CENTRAL_API_ROOT = process.env.NEXT_PUBLIC_CENTRAL_API_ENDPOINT;
+const CENTRAL_API_ROOT = process.env.NEXT_PUBLIC_CENTRAL_API_ENDPOINT + '/api';
 
 class ApiCtrl {
   constructor(centralAPI) {
@@ -23,47 +23,45 @@ class ApiCtrl {
         paramsSerializer: params => qs.stringify(params, {arrayFormat: 'repeat'})
     });*/
   }
-  
-  // businessUsers -- BEGIN
+   
+  // auth -- BEGIN
 
-  async businessSignup(signupInfo) {
-    return this.axios.post(`${CENTRAL_API_ROOT}/businessUsers/signup/`, signupInfo).catch(this._handleError);
+  async signup(signupInfo) {
+    return this.axios.post(`${CENTRAL_API_ROOT}/auth/signup/`, signupInfo).catch(this._handleError);
   }
 
-  async businesslogin(loginInfo) {
-    return this.axios.put(`${CENTRAL_API_ROOT}/businessUsers/signin/`, loginInfo).catch(this._handleError);
-  }
-
-  async getBusinessProfile() {
-    return this.get(`${CENTRAL_API_ROOT}/businessUsers/profile/`);
+  async login(loginInfo) {
+    return this.axios.post(`${CENTRAL_API_ROOT}/auth/signin/`, loginInfo).catch(this._handleError);
   }
   
-  async updateBusinessProfile(data) {
+  async reauthenticate() {
+    const header = await this.requestReauth();
+    return this.get(`${CENTRAL_API_ROOT}/auth/authorise/`, header);
+  }
+  
+  // auth -- END 
+  
+  // user -- BEGIN
+
+  async getProfile() {
     const header = await this.requestConfig();
-    return this.axios.put(`${CENTRAL_API_ROOT}/businessUsers/profile`, data, header);
+    return this.get(`${CENTRAL_API_ROOT}/user/profile/`, header);
   }
 
-  async businessAuthenticateEmail(data) {
-    return this.axios.post(`${CENTRAL_API_ROOT}/businessUsers/emailAuthentication/`, data, { headers: { 'user-agent': 'MOBILE_APP' } }).catch((err) => {
+  async authenticateEmail(data) {
+    return this.axios.post(`${CENTRAL_API_ROOT}/users/emailAuthentication/`, data, { headers: { 'user-agent': 'MOBILE_APP' } }).catch((err) => {
       return err;
     });
   }
 
-  async businessAuthNumberVerificate(data) {
-    return this.axios.post(`${CENTRAL_API_ROOT}/businessUsers/emailAuthenticationVerification/`, data, { headers: { 'user-agent': 'MOBILE_APP' } }).catch((err) => {
+  async authNumberVerificate(data) {
+    return this.axios.post(`${CENTRAL_API_ROOT}/users/emailAuthenticationVerification/`, data, { headers: { 'user-agent': 'MOBILE_APP' } }).catch((err) => {
       return err;
     });
   }
-  
-  async getTables() {
-    const header = await this.requestConfig();
-    return this.axios.get(`${CENTRAL_API_ROOT}/businessUsers/tables`, header);
-  }
-  
-  // async getEvent() {
-  //   const header = await this.requestConfig();
-  //   return this.axios.get(`${CENTRAL_API_ROOT}/businessUsers/tables`, header);
-  // }
+
+  // users -- END
+
   
   async getEvent() {
     const header = await this.requestConfig();
@@ -92,39 +90,6 @@ class ApiCtrl {
     return this.axios.put(`${CENTRAL_API_ROOT}/businessUsers/event/${eventId}/point`, data, header);
   }
   
-  // users -- BEGIN
-
-  async signup(signupInfo) {
-    return this.axios.post(`${CENTRAL_API_ROOT}/users/signup/`, signupInfo, { headers: { 'user-agent': 'MOBILE_APP' } }).catch(this._handleError);
-  }
-
-  async login(loginInfo) {
-    return this.axios.put(`${CENTRAL_API_ROOT}/users/signin/`, loginInfo, { headers: { 'user-agent': 'MOBILE_APP' } }).catch(this._handleError);
-  }
-
-  async getProfile() {
-    const header = await this.requestConfig();
-    return this.get(`${CENTRAL_API_ROOT}/users/profile/`, header);
-  }
-
-  async getWallet() {
-    const header = await this.requestConfig();
-    return this.get(`${CENTRAL_API_ROOT}/users/wallet/`, header);
-  }
-
-  async authenticateEmail(data) {
-    return this.axios.post(`${CENTRAL_API_ROOT}/users/emailAuthentication/`, data, { headers: { 'user-agent': 'MOBILE_APP' } }).catch((err) => {
-      return err;
-    });
-  }
-
-  async authNumberVerificate(data) {
-    return this.axios.post(`${CENTRAL_API_ROOT}/users/emailAuthenticationVerification/`, data, { headers: { 'user-agent': 'MOBILE_APP' } }).catch((err) => {
-      return err;
-    });
-  }
-
-  // users -- END
   
   // account -- BEGIN
   
@@ -438,6 +403,18 @@ class ApiCtrl {
     if (accessToken) {
       console.log(accessToken);
       requestConfig.headers.Authorization = `Bearer ${accessToken}`;
+      requestConfig.headers["Cache-Control"] = "no-cache";
+      // requestConfig.headers["user-agent"] = "MOBILE_APP";
+    }
+    return requestConfig;
+  }
+  
+  async requestReauth() {
+    let requestConfig = { headers: {} };
+    let refreshToken = window.localStorage.getItem('refreshToken');
+    if (refreshToken) {
+      console.log(refreshToken);
+      requestConfig.headers.Authorization = `Bearer ${refreshToken}`;
       requestConfig.headers["Cache-Control"] = "no-cache";
       // requestConfig.headers["user-agent"] = "MOBILE_APP";
     }

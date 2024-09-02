@@ -15,10 +15,6 @@ const AuthStore = observable(types.model('AuthStore', {
   businessCode: types.optional(types.string, ''),
 }).actions(self => ({
 
-  async setBusinessUserId(businessId) {
-    self.businessId = businessId;
-    window.localStorage.setItem('businessId', businessId);
-  },
   async setUserId(userId) {
     self.userId = userId;
     window.localStorage.setItem('userId', userId);
@@ -27,13 +23,13 @@ const AuthStore = observable(types.model('AuthStore', {
     self.accessToken = accessToken;
     window.localStorage.setItem('accessToken', accessToken);
   },
+  async setRefreshTokenn(refreshToken) {
+    self.refreshToken = refreshToken;
+    window.localStorage.setItem('refreshToken', refreshToken);
+  },
   async setUserUuid(uuid) {
     self.uuid = uuid;
     window.localStorage.setItem('userUuid', uuid);
-  },
-  async setBusinessCode(businessCode) {
-    self.businessCode = businessCode;
-    window.localStorage.setItem('businessCode', businessCode);
   },
   async setUserEmail(userEmail) {
     self.userEmail = userEmail;
@@ -47,13 +43,13 @@ const AuthStore = observable(types.model('AuthStore', {
     self.accessToken = '';
     window.localStorage.setItem('accessToken', '');
   },
+  async destroyRefreshToken() {
+    self.refreshToken = '';
+    window.localStorage.setItem('refreshToken', '');
+  },
   async destroyUserUuid() {
     self.uuid = '';
     window.localStorage.setItem('userUuid', '');
-  },
-  async destroyBusinessCode() {
-    self.businessCode = '';
-    window.localStorage.setItem('businessCode', '');
   },
   async destroyUserEmail() {
     self.email = '';
@@ -66,46 +62,22 @@ const AuthStore = observable(types.model('AuthStore', {
 
   logout() {
     self.destroyAccessToken();
+    self.destroyRefreshToken();
     self.destroyUserEmail();
-    // self.destroyUserUuid();
-  },
-  async authenticateBusiness() {
-    let accessToken = window.localStorage.getItem('accessToken');
-    
-    if (accessToken) {
-      return apiCtrl.getBusinessProfile().then((response) => {
-        let data = response.data;
-        // console.log(data);
-        getParent(self).bUserStore.setUser(data.profile);
-        self.setAuthenticationStatus('SUCCESS');
-        console.log(data);
-        return response;
-      }).catch(error => {
-        console.log(error);
-        self.destroyAccessToken();
-        // self.destroyUserUuid();
-        self.destroyUserEmail();
-        getParent(self).bUserStore.destroyUser();
-        self.setAuthenticationStatus('FAILED');
-        return Promise.reject();
-      });
-    } else {
-      getParent(self).bUserStore.destroyUser();
-      self.setAuthenticationStatus('FAILED');
-      return Promise.reject('No AccessToken');
-    }
+    self.destroyAuthenticationStatus();
   },
 
   async authenticate() {
     let accessToken = window.localStorage.getItem('accessToken');
 
     if (accessToken) {
+      console.log(accessToken);
       return apiCtrl.getProfile().then((response) => {
         let data = response.data;
-        // console.log(data);
-        getParent(self).userStore.setUser(data.profile);
-        self.setAuthenticationStatus('SUCCESS');
         console.log(data);
+        getParent(self).userStore.setUser(data);
+        self.setAuthenticationStatus('SUCCESS');
+        // console.log(data);
         return response;
       }).catch(error => {
         console.log(error);
@@ -125,12 +97,6 @@ const AuthStore = observable(types.model('AuthStore', {
   
 })).views(self => ({
   
-  get getBusinessId() {
-    return window.localStorage.getItem('businessId');
-  },
-  get getBusinessCode() {
-    return window.localStorage.getItem('businessCode');
-  },
   get getUerId() {
     return window.localStorage.getItem('userId');
   },
