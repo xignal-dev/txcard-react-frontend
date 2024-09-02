@@ -145,7 +145,7 @@ class MyApp extends App {
 		return (
       <Provider value={Stores} isMobile={isMobile}>
         <Head>
-          <title>SMB4U</title>
+          <title>TRAVEL EXPRESS</title>
         </Head>
           <Component {...pageProps}/>
         <GlobalStyle/>

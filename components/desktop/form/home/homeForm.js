@@ -79,10 +79,12 @@ const MidContainer = styled.div`
 const HomeForm = () => {
 
   const stores = useStore(Stores);
+  const [status, setStatus] = useState('');
 
   useEffect(() => {
     const init = async () => {
-      console.log('accessToken', window.localStorage.getItem('accessToken'));
+      console.log('authStatus:', Stores.authStore.authStatus);
+      setStatus(Stores.authStore.authStatus);
     };
 
     init();
@@ -98,7 +100,8 @@ const HomeForm = () => {
           <c.Image src='/images/tx_text_logo.png' style={{ top: '-10px', zIndex: '1' }}></c.Image>
           <c.Image src='/images/Finger_01.png' style={{ top: '-150px', left: '70px', zIndex: '99' }}></c.Image>
         </ImageBox>
-        <Login href={'/member'}>{'가입 / 로그인하기'}</Login>
+        {/* {status === 'SUCCESS' ? <Login href={'/member'}>{'가입 / 로그인하기'}</Login> : <></>} */}
+        <Login href={'/member'} style={{ visibility: status === 'SUCCESS' ? 'hidden': 'visible'}}>{'가입 / 로그인하기'}</Login>
         <c.Image src="/images/main_companies.png"></c.Image>
       </TopContainer>
 
