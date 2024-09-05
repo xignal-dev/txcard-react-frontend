@@ -10,11 +10,11 @@ import fetch from 'node-fetch';
 import MobileDetect from 'mobile-detect';
 import { isMobile } from 'react-device-detect';
 
-import UserStore from "../stores/smbUserStore";
-import MarketStore from "../stores/smbMarketStore";
-import AuthStore from "../stores/smbAuthStore";
-import AlertStore from "../stores/smbAlertStore";
-import SettingsStore from "../stores/smbSettingsStore";
+// import UserStore from "../stores/smbUserStore";
+// import MarketStore from "../stores/smbMarketStore";
+// import AuthStore from "../stores/smbAuthStore";
+// import AlertStore from "../stores/smbAlertStore";
+// import SettingsStore from "../stores/smbSettingsStore";
 
 import MontserratWoff from '../public/fonts/montserrat-v12-latin-ext-regular.woff';
 import MontserratWoff2 from '../public/fonts/montserrat-v12-latin-ext-regular.woff2';

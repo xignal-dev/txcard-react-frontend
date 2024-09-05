@@ -36,7 +36,7 @@ class ApiCtrl {
   
   async reauthenticate() {
     const header = await this.requestReauth();
-    return this.get(`${CENTRAL_API_ROOT}/auth/authorise/`, header);
+    return await this.axios.post(`${CENTRAL_API_ROOT}/auth/authorise/`, header).catch(this._handleError);
   }
   
   // auth -- END 
@@ -45,7 +45,7 @@ class ApiCtrl {
 
   async getProfile() {
     const header = await this.requestConfig();
-    return this.get(`${CENTRAL_API_ROOT}/user/profile/`, header);
+    return await this.axios.get(`${CENTRAL_API_ROOT}/user/profile/`, header).catch(this._handleErrorEx);
   }
 
   async authenticateEmail(data) {
@@ -61,7 +61,15 @@ class ApiCtrl {
   }
 
   // users -- END
+  
+  // transaction -- BEGIN
 
+  async getTransactions() {
+    const header = await this.requestConfig();
+    return this.axios.get(`${CENTRAL_API_ROOT}/transaction/list/`, header);
+  }
+   
+  // transaction -- END
   
   async getEvent() {
     const header = await this.requestConfig();
@@ -401,7 +409,7 @@ class ApiCtrl {
     let requestConfig = { headers: {} };
     let accessToken = window.localStorage.getItem('accessToken');
     if (accessToken) {
-      console.log(accessToken);
+      // console.log(accessToken);
       requestConfig.headers.Authorization = `Bearer ${accessToken}`;
       requestConfig.headers["Cache-Control"] = "no-cache";
       // requestConfig.headers["user-agent"] = "MOBILE_APP";
@@ -413,7 +421,7 @@ class ApiCtrl {
     let requestConfig = { headers: {} };
     let refreshToken = window.localStorage.getItem('refreshToken');
     if (refreshToken) {
-      console.log(refreshToken);
+      // console.log(refreshToken);
       requestConfig.headers.Authorization = `Bearer ${refreshToken}`;
       requestConfig.headers["Cache-Control"] = "no-cache";
       // requestConfig.headers["user-agent"] = "MOBILE_APP";
@@ -435,13 +443,40 @@ class ApiCtrl {
     return requestConfig;
   }
 
-  _handleError(error) {
-    if (!error.response) {
-      throw error;
+  async _handleError(err) {
+    if (!err.response) {
+      throw err;
     }
-    errorHelper.handleErrorCode(error.response);
-    console.log('handle error : ', error.response);
-    throw error;
+    errorHelper.handleErrorCode(err.response);
+    console.log('handle error : ', err.response);
+    throw err;
+  }
+  
+  async _handleErrorEx(err) {
+    if (!err.response) {
+      throw err;
+    }
+    console.log('handle error : ', err.response.data.message);
+    if(err.response.data.message !== 'access token expired') {
+      throw err;
+    } else {
+      let header = { headers: {} };
+      let refreshToken = window.localStorage.getItem('refreshToken');
+      
+      if (!refreshToken) {
+        throw err;
+      } else {
+        // console.log(refreshToken);
+        header.headers.Authorization = `Bearer ${refreshToken}`;
+        header.headers["Cache-Control"] = "no-cache";
+        const res = await axios.post(`${CENTRAL_API_ROOT}/auth/authorise/`, header).catch(authErr => {
+          console.log('handle error : ', authErr.response.data.message);
+          throw authErr;
+        });
+        console.log(res.response);
+        return res.response;
+      }      
+    }
   }
 }
 

@@ -7,9 +7,9 @@ import {
 } from 'mobx-state-tree';
 import { useProvider, useCreateStore } from "mobx-store-provider";
 
-import UserStore from "./smbUserStore";
+import UserStore from "./_userStore";
 import MarketStore from "./smbMarketStore";
-import AuthStore from "./smbAuthStore";
+import AuthStore from "./_authStore";
 import AlertStore from "./smbAlertStore";
 import SettingsStore from "./smbSettingsStore";
 import FnaStore from "./smbFnaStore";
@@ -17,7 +17,7 @@ import QnaStore from "./smbQnaStore";
 import WalletStore from './smbWalletStore';
 import OrderStore from './smbOrderStore';
 import MenuStore from './smbMenuStore';
-import AccountStore from './smbAccountStore';
+import TxStore from './_transactionStore';
 import NoticeStore from './smbNoticeStore';
 import BUserStore from './smbBUserStore';
 
@@ -34,7 +34,7 @@ export const RootStore = types.model('RootStore', {
   WalletStore: WalletStore,
   orderStore: OrderStore,
   menuStore: MenuStore,
-  accountStore: AccountStore,
+  txStore: TxStore,
   NoticeStore: NoticeStore,
 });
 
@@ -58,7 +58,7 @@ const Stores = RootStore.create({
   WalletStore: WalletStore.create(),
   orderStore: OrderStore.create(),
   menuStore: MenuStore.create(),
-  accountStore: AccountStore.create(),
+  txStore: TxStore.create(),
   NoticeStore: NoticeStore.create(),
 });
 
