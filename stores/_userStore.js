@@ -122,7 +122,7 @@ const UserStore = observable(types.model('UserStore', {
       }
     })
     .catch(e => {
-      // getParent(self).authStore.setAuthenticationStatus('FAILED');
+      getParent(self).authStore.logout();
       console.log(e);
     });
   },

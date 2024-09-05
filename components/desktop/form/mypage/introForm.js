@@ -182,17 +182,22 @@ const HomeForm = () => {
 
   const stores = useStore(Stores);
   const [user, setUser] = useState({});
+  const [txList, setTxList] = useState([]);
 
   useEffect(() => {
     const init = async () => {
       // console.log('accessToken', window.localStorage.getItem('accessToken'));
       await Stores.userStore.getProfile();
-      if(Stores.authStore.authStatus !== 'SUCCESS') {
-        Router.push({ pathname: '/' });
-        return;
-      }
-      console.log(Stores.userStore.profile);
+      // if(Stores.authStore.authStatus !== 'SUCCESS') {
+      //   Router.push({ pathname: '/' });
+      //   return;
+      // }
+      
       setUser(Stores.userStore);
+      
+      await Stores.txStore.getTransactions();
+      setTxList(Stores.txStore.txList);
+      console.log(Stores.txStore.txList);
     };
 
     init();
@@ -270,7 +275,22 @@ const HomeForm = () => {
               </tr>
             </thead>
             <tbody>
-              <HistoryTr>
+              {
+                txList.map((item, idx) => {
+                  return (
+                    <HistoryTr key={idx}>
+                    <HistoryTd>{idx + 1}</HistoryTd>
+                    <HistoryTd>{item.ccTxnum}</HistoryTd>
+                    <HistoryTd>{item.ccTxdate}</HistoryTd>
+                    <HistoryTd>{item.ccAmount}</HistoryTd>
+                    <HistoryTd>{item.ccFeevat}</HistoryTd>
+                    <HistoryTd>{item.ccRunbal}</HistoryTd>
+                  </HistoryTr>
+                  );
+                })
+              }
+
+              {/* <HistoryTr>
                 <HistoryTd>1</HistoryTd>
                 <HistoryTd>2352598734</HistoryTd>
                 <HistoryTd>2024/06/23</HistoryTd>
@@ -293,7 +313,7 @@ const HomeForm = () => {
                 <HistoryTd>1,200,000</HistoryTd>
                 <HistoryTd>2,300</HistoryTd>
                 <HistoryTd>12,000,000</HistoryTd>
-              </HistoryTr>
+              </HistoryTr> */}
             </tbody>
           </HistoryTable>
         </HistoryBox>

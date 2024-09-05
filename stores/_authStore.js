@@ -1,5 +1,6 @@
 import { getParent, types } from 'mobx-state-tree';
 import { observable, action } from "mobx";
+import Router from 'next/router';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 // import { getItemFromAsync, setItemToAsync } from '../utils/asyncStorage';
 import apiCtrl from '../utils/api';
@@ -65,6 +66,7 @@ const AuthStore = observable(types.model('AuthStore', {
     self.destroyRefreshToken();
     self.destroyUserEmail();
     self.destroyAuthenticationStatus();
+    Router.push({ pathname: '/' });
   },
 
   async authenticate() {
