@@ -46,7 +46,7 @@ const Profile = styled.img`
   height: 134px;
 `;
 
-const Edit = styled.button`
+const Button = styled.button`
   margin-top: 20px;
   border-radius: 50px;
   font-size: 18px;
@@ -192,9 +192,9 @@ const HomeForm = () => {
       //   Router.push({ pathname: '/' });
       //   return;
       // }
-      
+
       setUser(Stores.userStore);
-      
+
       await Stores.txStore.getTransactions();
       setTxList(Stores.txStore.txList);
       console.log(Stores.txStore.txList);
@@ -209,7 +209,7 @@ const HomeForm = () => {
       <TopContainer>
         <TopBox>
           <c.Image style={{ width: '134px' }} src={'/images/Profile_01.png'}></c.Image>
-          <Edit>{'EDIT'}</Edit>
+          <Button>{'EDIT'}</Button>
         </TopBox>
         <TopBox style={{ alignItems: 'flex-start' }}>
           <c.SmallText>{user.cmName}</c.SmallText>
@@ -223,7 +223,7 @@ const HomeForm = () => {
             </TopMiniBox>
             <TopMiniBox>
               <c.TinyText>{'Phone'}</c.TinyText>
-              <c.TinyText>{user.cmTel === '' ? '-' : user.cmTel }</c.TinyText>
+              <c.TinyText>{user.cmTel === '' ? '-' : user.cmTel}</c.TinyText>
               <c.TinyText style={{ marginTop: '10px' }}>{'Grade'}</c.TinyText>
               <c.TinyText>{user.cmLevel === 1 ? 'Silver' : user.cmLevel === 2 ? 'Platinum' : ''}</c.TinyText>
             </TopMiniBox>
@@ -235,7 +235,10 @@ const HomeForm = () => {
         <TopBox style={{ alignItems: 'flex-start' }}>
           <c.SmallText>{'이용중인 카드'}</c.SmallText>
           <c.LargeText>{'이용중인 카드가 없어요'}</c.LargeText>
-          <Edit>{'발급받기'}</Edit>
+          <div>
+            <Button>{'발급받기'}</Button>
+            <Button>{'로그아웃'}</Button>
+          </div>
         </TopBox>
       </TopContainer>
 
@@ -279,13 +282,13 @@ const HomeForm = () => {
                 txList.map((item, idx) => {
                   return (
                     <HistoryTr key={idx}>
-                    <HistoryTd>{idx + 1}</HistoryTd>
-                    <HistoryTd>{item.ccTxnum}</HistoryTd>
-                    <HistoryTd>{item.ccTxdate}</HistoryTd>
-                    <HistoryTd>{item.ccAmount}</HistoryTd>
-                    <HistoryTd>{item.ccFeevat}</HistoryTd>
-                    <HistoryTd>{item.ccRunbal}</HistoryTd>
-                  </HistoryTr>
+                      <HistoryTd>{idx + 1}</HistoryTd>
+                      <HistoryTd>{item.ccTxnum}</HistoryTd>
+                      <HistoryTd>{item.ccTxdate}</HistoryTd>
+                      <HistoryTd>{item.ccAmount}</HistoryTd>
+                      <HistoryTd>{item.ccFeevat}</HistoryTd>
+                      <HistoryTd>{item.ccRunbal}</HistoryTd>
+                    </HistoryTr>
                   );
                 })
               }

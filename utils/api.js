@@ -1,5 +1,7 @@
 import axios from 'axios';
 import qs from 'qs';
+import Router from 'next/router';
+
 import errorHelper, { handleErrorCode } from './errorHelper';
 // import { getItemFromAsync } from "./asyncStorage";
 import { isEmpty } from './utils';
@@ -31,7 +33,12 @@ class ApiCtrl {
   }
 
   async login(loginInfo) {
-    return this.axios.post(`${CENTRAL_API_ROOT}/auth/signin/`, loginInfo).catch(this._handleError);
+    return this.axios.post(`${CENTRAL_API_ROOT}/auth/signin`, loginInfo).catch(this._handleError);
+  }
+  
+  async signout() {
+    const header = await this.requestReauth();
+    return this.axios.delete(`${CENTRAL_API_ROOT}/auth/signout/`, header).catch(this._handleError);
   }
   
   async reauthenticate() {
@@ -469,8 +476,9 @@ class ApiCtrl {
         // console.log(refreshToken);
         header.headers.Authorization = `Bearer ${refreshToken}`;
         header.headers["Cache-Control"] = "no-cache";
-        const res = await axios.post(`${CENTRAL_API_ROOT}/auth/authorise/`, header).catch(authErr => {
+        const res = await axios.post(`${CENTRAL_API_ROOT}/auth/authorise/`, {}, header).catch(authErr => {
           console.log('handle error : ', authErr.response.data.message);
+          Router.push('/');
           throw authErr;
         });
         console.log(res.response);
