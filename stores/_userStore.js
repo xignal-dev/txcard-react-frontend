@@ -122,7 +122,7 @@ const UserStore = observable(types.model('UserStore', {
       }
     })
     .catch(e => {
-      getParent(self).authStore.logout();
+      getParent(self).authStore.signout();
       console.log(e);
     });
   },

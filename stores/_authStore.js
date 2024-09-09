@@ -61,10 +61,16 @@ const AuthStore = observable(types.model('AuthStore', {
     window.localStorage.setItem('authenticationStatus', 'IN_PROGRESS');
   },
 
-  logout() {
+  signout() {
+    apiCtrl.signout().then((response) => {
+    }).catch(error => {
+      console.log(error);
+    });
+    
     self.destroyAccessToken();
     self.destroyRefreshToken();
     self.destroyUserEmail();
+    getParent(self).userStore.destroyUser();
     self.destroyAuthenticationStatus();
     Router.push({ pathname: '/' });
   },

@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next'
 import c from "../common/commonStyle";
 import DropdownMenu from "./dropdownMenu";
 
+import Stores from '../../../stores';
+
 
 const HeaderContainer = styled.header`
 	background-color: #fff;
@@ -101,6 +103,28 @@ const ProfileBox = styled.a`
   }
 `;
 
+const Login = styled.a`
+  border-radius: 50px;
+  padding: 7px 20px;  
+  color: #fff;
+  background-color: #0139CC;
+  font-weight: bold;
+  border: 0px solid #D9D9D9;
+  
+  &:hover{
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+  }  
+  &:active{
+    background-color: #5383FF;
+    color: #fff;
+  }
+  &:focus {
+    outline: none;
+  }
+`;
+
 const Profile = styled.img`
   width: 44px;
   height: 44px;
@@ -122,6 +146,16 @@ const Header = () => {
   const [txCardVisible, setTxCardVisible] = useState(false);
   const [txPointVisible, setTxPointVisible] = useState(false);
   const [langVisible, setLangVisible] = useState(false);
+  const [status, setStatus] = useState('');
+
+  useEffect(() => {
+    const init = async () => {
+      console.log('authStatus:', Stores.authStore.authStatus);
+      setStatus(Stores.authStore.authStatus);
+    };
+
+    init();
+  }, []);
 
   const txCardMenuList = [{ name: 'TX CARD?', link: '/txcard', state: 1 }, { name: '발급하기', link: '/txcard', state: 2 }, { name: '등록하기', link: '/txcard', state: 3 }, { name: '분실신고', link: '/txcard', state: 4 }];
   
@@ -186,9 +220,12 @@ const Header = () => {
       </LogoBox>
       <RightMenuBox>
         <UsdtDeposit href={'/deposit?state=1'}>{'USDT Deposit'}</UsdtDeposit>
-        <ProfileBox href={'/mypage'}>
-          <Profile src={'/images/Profile_01.png'}></Profile>
-        </ProfileBox>
+        {status === 'SUCCESS' ?
+          <ProfileBox href={'/mypage'}>
+            <Profile src={'/images/Profile_01.png'}></Profile>
+          </ProfileBox>
+          :
+          <Login href={'/member'} style={{ visibility: status === 'SUCCESS' ? 'hidden': 'visible'}}>{'로그인'}</Login>}
         <LangBox onMouseEnter={() => handleMouseEnter('lang')} onMouseLeave={() => handleMouseLeave('lang')}>
           <Language src={'/images/language_01.png'}>
           </Language>
