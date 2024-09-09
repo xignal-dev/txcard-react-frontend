@@ -33,7 +33,7 @@ class ApiCtrl {
   }
 
   async login(loginInfo) {
-    return this.axios.post(`${CENTRAL_API_ROOT}/auth/signin`, loginInfo).catch(this._handleError);
+    return this.axios.post(`${CENTRAL_API_ROOT}/auth/signin/`, loginInfo).catch(this._handleError);
   }
   
   async signout() {
