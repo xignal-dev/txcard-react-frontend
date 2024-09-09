@@ -202,6 +202,12 @@ const HomeForm = () => {
 
     init();
   }, []);
+  
+  const onClickSignout = () => {
+    
+    // console.log(data);
+    Stores.authStore.signout();
+  }
 
   return (
     <IntroContainer>
@@ -235,10 +241,10 @@ const HomeForm = () => {
         <TopBox style={{ alignItems: 'flex-start' }}>
           <c.SmallText>{'이용중인 카드'}</c.SmallText>
           <c.LargeText>{'이용중인 카드가 없어요'}</c.LargeText>
-          <div>
+          <TopSubBox>
             <Button>{'발급받기'}</Button>
-            <Button>{'로그아웃'}</Button>
-          </div>
+            <Button onClick={() => onClickSignout()}>{'로그아웃'}</Button>
+          </TopSubBox>
         </TopBox>
       </TopContainer>
 
