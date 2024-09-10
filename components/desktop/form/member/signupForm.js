@@ -89,6 +89,7 @@ const SignupButton = styled(c.Button)`
   width: 535px;
   height: 89px;
   margin-top: 17px;
+  border-radius: 10px;
 `;
 
 

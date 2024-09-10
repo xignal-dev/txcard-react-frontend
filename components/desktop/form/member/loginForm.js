@@ -49,6 +49,7 @@ const LoginBox = styled.div`
 `;
 
 const InputBox = styled.div`
+  font-size: 18px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -88,6 +89,7 @@ const LoginButton = styled(c.Button)`
   width: 535px;
   height: 89px;
   margin-top: 17px;
+  border-radius: 10px;
 `;
 
 
