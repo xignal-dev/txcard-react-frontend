@@ -5,6 +5,9 @@ import styled from 'styled-components';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 
+import Stores from '../../../stores';
+import c from "./commonStyle";
+
 const PopupContainer = styled.div`
   position: fixed;
   display: flex;
@@ -19,6 +22,8 @@ const PopupContainer = styled.div`
   flex-flow: '';
   // overflow: scroll;
   visibility: ${props => props.isShow ? 'visible' : 'hidden'};
+  opacity: ${props => props.isShow ? '1' : '0'};
+  transition: all 0.3s linear 0.3s;
 `;
 
 const Box = styled.div`
@@ -41,10 +46,10 @@ const Wrapper = styled.div`
 const TitleContainer = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: #F07B3E;
+  background-color: #000;
   align-items: center;
   justify-content: space-between;
-  color: #ffffff;
+  color: #FFFFFF;
   padding: 16px;
 `;
 
@@ -60,11 +65,12 @@ const ContentContainer = styled.div`
 `;
 
 const Content = styled.div`
+  color: #000;
   overflow: overlay;
   width: 100%;
-  font-size: 2.2vw;
+  font-size: 1.2rem;
   max-height: 720px;
-  
+  white-space: pre-line;
   &::-webkit-scrollbar { 
     width: 10px;
   }
@@ -94,15 +100,13 @@ const InputContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 50%;
+  // width: 50%;
   height: 50px;
-  margin: 0 5px;
-  padding-right: 16px;
-  border-bottom-width: initial;
-  border-bottom-style: groove;
-  border-bottom-color: initial;  
-  // border: 1px solid #CECECE;
-  // border-radius: 5px;
+  margin: 15px;
+  padding: 0 10px; 
+  // margin-bottom: 5px;
+  border: 1px solid #CECECE;
+  border-radius: 5px;
 `;
 
 const InputText = styled.input`
@@ -123,40 +127,33 @@ const InputText = styled.input`
   }
 `;
 
+const ErrorText = styled.label`
+  font-size: 16px;
+  font-weight: 400;
+  color: #db3737;
+  // margin-top: 12px;
+  visibility: ${props => props.isEnabled ? 'visible' : 'hidden'};
+`;
+
 const Input = styled.input`
  display: none;
 `;
 
-const Button = styled.button`
-  // margin: 5px 5px 5px 5px;
-  // padding: 10px 90px;
-  border-radius: 10px;
-  background-color: #FFFFFF;
-  display: flex;
-  align-items: center;
-  color: #000000;
-  font-style: normal;
+const Button = styled(c.Button)`
+  width: 30vw;
   font-weight: 600;
-  font-size: 2.4vw;
-  flex-direction: column;
-  justify-content: center;
-  border: 1px solid #D9D9D9;
-  outline: none;
-  &:hover{
-    background-color: #FFF9F1;
-    color: #F07B3E;
-  }
-  &:focus-visible {
-    outline: none;
-  }
+  font-size: 1.2rem;
+  margin-top: 17px;
+  padding: 10px 0 10px 0;
+  border-radius: 5px;
 `;
 
 const Upload = styled.label`
   border-radius: 10px;
-  background-color: #FFFFFF;
+  background-color: #F1F2F4;
   display: flex;
   align-items: center;
-  color: #000000;
+  color: #FFFFFF;
   font-style: normal;
   font-weight: 600;
   font-size: 2.4vw;
@@ -165,8 +162,8 @@ const Upload = styled.label`
   border: 1px solid #D9D9D9;
   outline: none;
   &:hover{
-    background-color: #FFF9F1;
-    color: #F07B3E;
+    background-color: #4FC0E8;
+    color: #FFFFFF;
   }
   &:focus-visible {
     outline: none;
@@ -180,181 +177,94 @@ const CloseButton = styled.img`
     margin-right: 10px;
 `;
 
-const Popup = ({popupState, setPopupState, setPopupResult, popupInfo, setPopupInfo}) => {
-  
-  const [inputValue1, setInputValue1] = useState('');
-  const [inputValue2, setInputValue2] = useState('');
-  const [uploadFile, setUploadFile] = useState({});
+
+const Popup = ({popupState, setPopupState, setPopupResult, popupInfo}) => {
+
+  const [valueOne, setValueOne] = useState('');
+  const [errorState, setErrorState] = useState(0);
   
   useEffect(() => {
 		const init = async () => {
-      setInputValue1('');
-      setInputValue2('');
-      setUploadFile({});
 		};
 
 		init();
 	}, [popupState]);
   
-  const onPressInputValue = (e) => {
-    // if(e.key === 'Enter') {
-    //   this.buttonRef.waitResponse();
-    // }
-  }
-  
-  const onChangeInputValue1 = (e) => {
-    // e.target.value = e.target.value.replace(/[^0-9]/g, '');
-    setInputValue1(e.target.value);
-  }
-  
-  const onChangeInputValue2 = (e) => {
-    // e.target.value = e.target.value.replace(/[^0-9]/g, '');
-    setInputValue2(e.target.value);
-  }
   
   const closePopup = () => {
+    setValueOne('');
+    setErrorState(0);
+    setPopupResult(false, popupInfo);
     setPopupState(false);
   }
   
-  const confirmPopup = () => {
-    
-    let data = {
-      type: popupInfo.type,
-      kind: popupInfo.kind,
-      id: popupInfo.id,
-      result1: inputValue1,
-      result2: inputValue2,
-    }
-    
-    if(popupInfo.kind === 'product' && popupInfo.type === 0) {
-      data.file = uploadFile.selectedFileA;
-    } 
-    
-    setPopupResult(data).then(() => {
-      setPopupState(false); 
-    }).catch((err) => {
-      setPopupState(false); 
-    });
+  const onClickOK = async () => {
+    setPopupResult(true, popupInfo);
+    setPopupState(false);
   }
   
-  const fileChangedHandler = (e) => {
-    const id = e.target.id;
-    if (id === 'input-file-1') {
-      let file = e.target.files[0];
-      let filename = file.name;
-      setUploadFile({
-        selectedFileA: file,
-        selectedFileNameA: filename
+  const confirmPopup = async () => {
+    let res = await Stores.accountStore.verifyCardNumber({ cardNumber: valueOne});
+    if(res.success == true) {
+      popupInfo.valueOne = valueOne;
+      setPopupResult(true, popupInfo).then((result) => {
+        setPopupState(false);  
       });
-      console.log(filename);
-    } 
+    } else {
+      setErrorState(1);
+    }
   };
+
+  const onChangeCardNumber = (e) => {
+    e.target.value = e.target.value.replace(/[^0-9]/g, '');
+    setValueOne(e.target.value);
+  }
   
   return(
     <PopupContainer isShow={popupState}>
-      {popupInfo.type === 0 ? // 추가
       <Box>
-        {popupInfo.title !== undefined ? 
-          <TitleContainer>
-            <Title>{popupInfo.title}</Title>
-            <FontAwesomeIcon style={{ width: '2vw'}} icon={faXmark} size={'2xl'} color={'#ffffff'} onClick={closePopup} />
-          </TitleContainer>
-          : <></>}
-          <Wrapper>
-            <ContentContainer>
-              <Content>{popupInfo.content}</Content>
-            </ContentContainer>
-            <OptionBox>
-              <div style={{ display: 'flex', flexDirection: 'row', width: '70%'}}>
+      {popupInfo.title !== undefined ? 
+        <TitleContainer>
+          <Title>{popupInfo.title}</Title>
+          <FontAwesomeIcon style={{ width: '4vw'}} icon={faXmark} size={'2xl'} color={'#FFFFFF'} onClick={closePopup} />
+        </TitleContainer>
+        : <></>}
+        <Wrapper>
+          <ContentContainer>
+            <Content>{popupInfo.content}</Content>
+          </ContentContainer>
+          <OptionBox>
+            
+            {popupInfo.type === 1 ?
+              <Button onClick={() => onClickOK()}>{'확인'}</Button> :
+              popupInfo.type === 2 ?
+              <>
+                <Button onClick={() => confirmPopup()}>{'확인'}</Button>
+                <Button onClick={() => closePopup()}>{'취소'}</Button> 
+              </> : 
+              popupInfo.type === 3 ?
+              <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', width: '100%'}}>
                 <InputContainer>
                   <InputText
                     type={'input'}
-                    value={inputValue1}
-                    placeholder={`${popupInfo.title}`}
-                    onKeyPress={onPressInputValue}
-                    onChange={onChangeInputValue1}
+                    value={valueOne}
+                    placeholder={'카드번호 입력'}
+                    onChange={onChangeCardNumber}
+                    maxLength={16}
                   />
+                  <ErrorText isEnabled={errorState >= 1 ? true : false}>
+                    {'소속된 카드가 아닙니다.'}
+                  </ErrorText>
                 </InputContainer>
-                {popupInfo.kind === 'product' || popupInfo.kind === 'option_check' || popupInfo.kind === 'option_radio_item' ? 
-                <>
-                  <InputContainer>
-                    <InputText
-                      type={'input'}
-                      value={inputValue2}
-                      placeholder={`${popupInfo.title} 가격`}
-                      onKeyPress={onPressInputValue}
-                      onChange={onChangeInputValue2}
-                    />
-                  </InputContainer>
-                </>
-                : <></>}
-              </div>
-              <Button onClick={() => confirmPopup()}>{popupInfo.buttonText}</Button>
-              <Button onClick={() => setPopupState(false)}>{'취소'}</Button>
-            </OptionBox>
-            {popupInfo.kind === 'product' ? 
-            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end'}}>
-              <Content style={{ fontSize: '18px', width: '70%', borderBottomWidth: 'initial', borderBottomStyle: 'groove', borderBottomColor: 'initial' }}>{uploadFile ? uploadFile.selectedFileNameA : ''}</Content>
-              <Input type="file" onChange={fileChangedHandler} id="input-file-1" />
-              <Upload htmlFor="input-file-1">{'업로드'}</Upload>
-            </div> : <></>}
-          </Wrapper>
-        </Box> : popupInfo.type === 1 ? // 삭제
-        <Box>
-          {popupInfo.title !== undefined ? 
-            <TitleContainer>
-              <Title>{popupInfo.title}</Title>
-              <FontAwesomeIcon style={{ width: '2vw'}} icon={faXmark} size={'2xl'} color={'#ffffff'} onClick={closePopup} />
-            </TitleContainer>
-            : <></>}
-          <Wrapper>
-            <ContentContainer>
-              <Content>{popupInfo.content}</Content>
-            </ContentContainer>
-            <OptionBox>
-              <Button onClick={() => confirmPopup()}>{popupInfo.buttonText}</Button>
-              <Button onClick={() => setPopupState(false)}>{'취소'}</Button>
-            </OptionBox>
-          </Wrapper>
-        </Box> : popupInfo.type === 2 || popupInfo.type === 3 ? // 수정
-        <Box>
-          {popupInfo.title !== undefined ? 
-            <TitleContainer>
-              <Title>{popupInfo.title}</Title>
-              <FontAwesomeIcon style={{ width: '2vw'}} icon={faXmark} size={'2xl'} color={'#ffffff'} onClick={closePopup} />
-            </TitleContainer>
-            : <></>}
-          <Wrapper>
-            <ContentContainer>
-              <Content>{popupInfo.content}</Content>
-            </ContentContainer>
-            <OptionBox>
-              {popupInfo.kind === 'product' || popupInfo.kind === 'profile' ? <></> :
-                <>
-                  <InputContainer>
-                    <InputText
-                      type={'input'}
-                      value={inputValue1}
-                      onKeyPress={onPressInputValue}
-                      onChange={onChangeInputValue1}
-                    />
-                  </InputContainer>
-                  <InputContainer>
-                    <InputText
-                      type={'input'}
-                      value={inputValue2}
-                      onKeyPress={onPressInputValue}
-                      onChange={onChangeInputValue2}
-                    />
-                  </InputContainer>
-                </>
-              }
-              <Button onClick={() => confirmPopup()}>{popupInfo.buttonText}</Button>
-              <Button onClick={() => setPopupState(false)}>{'취소'}</Button>
-            </OptionBox>
-          </Wrapper>
-          </Box> :
-        <></>}
+                <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around'}}>
+                  <Button onClick={() => confirmPopup()}>{'카드 등록'}</Button>
+                  <Button onClick={() => closePopup()}>{'신규 발행'}</Button>
+                </div>
+              </div> : <></>
+            }
+          </OptionBox>
+        </Wrapper>
+      </Box>
     </PopupContainer>
   );
 };

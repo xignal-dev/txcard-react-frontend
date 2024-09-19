@@ -8,34 +8,25 @@ import {
 import { useProvider, useCreateStore } from "mobx-store-provider";
 
 import UserStore from "./_userStore";
-import MarketStore from "./smbMarketStore";
 import AuthStore from "./_authStore";
-import AlertStore from "./smbAlertStore";
-import SettingsStore from "./smbSettingsStore";
-import FnaStore from "./smbFnaStore";
-import QnaStore from "./smbQnaStore";
-import WalletStore from './smbWalletStore';
-import OrderStore from './smbOrderStore';
-import MenuStore from './smbMenuStore';
+import OfficeStore from './_officeStore';
 import TxStore from './_transactionStore';
-import NoticeStore from './smbNoticeStore';
-import BUserStore from './smbBUserStore';
+
+// import AlertStore from "./smbAlertStore";
+// import SettingsStore from "./smbSettingsStore";
+// import FnaStore from "./smbFnaStore";
+// import QnaStore from "./smbQnaStore";
+// import WalletStore from './smbWalletStore';
+// import OrderStore from './smbOrderStore';
+// import NoticeStore from './smbNoticeStore';
+// import BUserStore from './smbBUserStore';
 
 export const RootStore = types.model('RootStore', {
 
   authStore: AuthStore,
   userStore: UserStore,
-  bUserStore: BUserStore,
-  alertStore: AlertStore,
-  settingsStore: SettingsStore,
-  marketStore: MarketStore,
-  FnaStore: FnaStore,
-  QnaStore: QnaStore,
-  WalletStore: WalletStore,
-  orderStore: OrderStore,
-  menuStore: MenuStore,
+  officeStore: OfficeStore,
   txStore: TxStore,
-  NoticeStore: NoticeStore,
 });
 
 // export const Stores = useCreateStore(RootStore, {
@@ -49,17 +40,8 @@ export const RootStore = types.model('RootStore', {
 const Stores = RootStore.create({
   authStore: AuthStore.create(),
   userStore: UserStore.create(),
-  bUserStore: BUserStore.create(),
-  alertStore: AlertStore.create(),
-  settingsStore: SettingsStore.create(),
-  marketStore: MarketStore.create(),
-  FnaStore: FnaStore.create(),
-  QnaStore: QnaStore.create(),
-  WalletStore: WalletStore.create(),
-  orderStore: OrderStore.create(),
-  menuStore: MenuStore.create(),
   txStore: TxStore.create(),
-  NoticeStore: NoticeStore.create(),
+  officeStore: OfficeStore.create(),
 });
 
 // stores['socketStore'] = socketStore;

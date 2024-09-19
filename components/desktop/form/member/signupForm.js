@@ -9,6 +9,7 @@ import c from "../../common/commonStyle";
 import config from '../../../../config';
 import api from '../../../../utils/api';
 import Stores from '../../../../stores';
+import Popup from '../../common/popup';
 
 
 
@@ -84,22 +85,43 @@ const InputText = styled.input`
   }
 `;
 
+const SignupErrorText = styled.div`
+  font-size: 16px;
+  font-weight: 400;
+  color: #db3737;
+  // margin-top: 12px;
+  visibility: ${props => props.isEnabled ? 'visible' : 'hidden'};
+`;
+
+
 const SignupButton = styled(c.Button)`
   font-size: 22px;
   width: 535px;
   height: 89px;
   margin-top: 17px;
+  border-radius: 10px;
 `;
 
 
-const LoginForm = ({ setMemberShipState }) => {
+const SignupForm = ({ setMemberShipState }) => {
 
   const stores = useStore(Stores);
 
-  const [memberId, setMemberId] = useState('');
-  const [memberPw, setMemberPw] = useState('');
+  const [memberId, setMemberId] = useState('test');
+  const [memberEmail, setMemberEmail] = useState('email@mail.com');
+  const [memberPw, setMemberPw] = useState('1234qwer!');
+  const [memberPw2, setMemberPw2] = useState('1234qwer!');
 
+  const [office, setOffice] = useState('');
+  const [officeList, setOfficeList] = useState([]);
+  
+  const [errState, setErrState] = useState(0);
+  const [errMessage, setErrMessage] = useState('');
+  
   const [country, setCountry] = useState('');
+  
+  const [popupState, setPopupState] = useState(false);
+  const [popupInfo, setPopupInfo] = useState({});
 
   const countries = [
     { value: 0, label: '한국' },
@@ -110,7 +132,14 @@ const LoginForm = ({ setMemberShipState }) => {
 
   useEffect(() => {
     const init = async () => {
-      console.log('accessToken', window.localStorage.getItem('accessToken'));
+      await Stores.officeStore.getOffices();
+      const list = [];
+      Stores.officeStore.officeList.forEach(element => {
+        console.log(element);
+        list.push({ value: element.coNo, label: element.coName})
+      });
+      console.log(list);
+      setOfficeList(list);
     };
 
     init();
@@ -123,19 +152,88 @@ const LoginForm = ({ setMemberShipState }) => {
     // setMemberId(e.target.value.replace(/[^0-9]/g, ''));
     setMemberId(e.target.value);
   }
+  
+  const onChangeEmail = (e) => {
+    setMemberEmail(e.target.value);
+  }
 
   const onChangePw = (e) => {
     setMemberPw(e.target.value);
   }
+  
+  const onChangePw2 = (e) => {
+    setMemberPw2(e.target.value);
+  }
 
   const onChangeSelect = (e) => {
     // console.log(e);
-    setCountry(e);
+    setOffice(e);
+  }
+  
+  const setPopupResult = async (res, popupData) => {
+    if(res)
+      setMemberShipState(1);
+    // setIsNewCard(res);
+  }
+  
+  const onClickSignup = () => {
+    
+      if(memberPw != memberPw2) {
+        // setErrMessage('잘못된 패스워드를 입력하였습니다');
+        return;
+      }
+
+      if(memberPw.length < 8)
+        return;
+      
+      if(memberId.length === 0 || memberEmail.length === 0)
+        return;
+
+      let data = {
+        email: memberEmail,
+        office: office.label,
+        password: memberPw,
+      }
+    
+    api.signup(data).then((response) => {
+      
+      console.log(response);
+      
+      if(response.status >= 200 && response.status <= 300) {
+        let data = response.data;
+        console.log(data);
+        setPopupInfo({
+          title: "알림",
+          content: "회원 가입을 완료하였습니다.",
+          type: 1,
+        });
+        setPopupState(true);
+        // setMemberShipState(1)
+        // Stores.authStore.setUserEmail(data.email);
+        // Stores.authStore.setAccessToken(data.token.accessToken);
+        // Stores.authStore.setRefreshTokenn(data.token.refreshToken);
+        // Stores.authStore.authenticate();
+        // Router.push({ pathname: '/', });
+        // handleSubmit();
+      }
+    }).catch((err) => {
+      console.log(err);
+      // if(err.response.data.message === 'email already used') {
+        
+      // }
+      setErrMessage(err.response.data.message);
+      setErrState(2);
+      setMemberPw('');
+      setMemberPw2('');
+      setMemberId('');
+      setMemberEmail('');
+      setOffice('');
+    });
   }
 
   return (
     <HomeContainer>
-
+      <Popup popupState={popupState} setPopupState={setPopupState} setPopupResult={setPopupResult} popupInfo={popupInfo} />
       <TopContainer>
         <c.BigText>{'여행의 자유로움에 \n가입하기'}</c.BigText>
 
@@ -159,21 +257,21 @@ const LoginForm = ({ setMemberShipState }) => {
             </p>
             <InputText
               type={'input'}
-              value={memberId}
+              value={memberEmail}
               placeholder={'이메일 주소를 입력하세요.'}
-              onChange={onChangeId} >
+              onChange={onChangeEmail} >
             </InputText>
           </InputBox>
 
           <InputBox>
             <p style={{ width: '100px', textAlign: 'start', marginRight: '25px' }}>
-              {'국가'}
+              {'지사'}
             </p>
             <Select onChange={onChangeSelect}
               styles={c.selectorStyle}
-              options={countries}
+              options={officeList}
               placeholder={'선택'}
-              value={country}
+              value={office}
             />
           </InputBox>
 
@@ -195,13 +293,20 @@ const LoginForm = ({ setMemberShipState }) => {
             </p>
             <InputText
               type={'password'}
-              value={memberPw}
+              value={memberPw2}
               placeholder={'비밀번호를 확인해주세요.'}
-              onChange={onChangePw} >
+              onChange={onChangePw2} >
             </InputText>
           </InputBox>
+          
+          <SignupErrorText isEnabled={memberPw != memberPw2 ? true : false}>
+            {'잘못된 패스워드를 입력하였습니다'}
+          </SignupErrorText>
+          <SignupErrorText isEnabled={errMessage && errMessage.length > 0 ? true : false}>
+            {errMessage}
+          </SignupErrorText>
 
-          <SignupButton>{'가입하기'}</SignupButton>
+          <SignupButton onClick={() => onClickSignup()}>{'가입하기'}</SignupButton>
         </LoginBox>
 
         <c.Image src="/images/main_companies.png" style={{ margin: '40px 0 1095.95px 0' }}></c.Image>
@@ -211,4 +316,4 @@ const LoginForm = ({ setMemberShipState }) => {
   );
 };
 
-export default LoginForm;
+export default SignupForm;

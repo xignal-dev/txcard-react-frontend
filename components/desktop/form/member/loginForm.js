@@ -49,6 +49,7 @@ const LoginBox = styled.div`
 `;
 
 const InputBox = styled.div`
+  font-size: 18px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -88,6 +89,7 @@ const LoginButton = styled(c.Button)`
   width: 535px;
   height: 89px;
   margin-top: 17px;
+  border-radius: 10px;
 `;
 
 
@@ -180,7 +182,7 @@ const LoginForm = ({setMemberShipState}) => {
               onChange={onChangePw} >
             </InputText>
           </InputBox>
-          <LoginButton onClick={() => onClickSignin(2)}>{'로그인 하기'}</LoginButton>
+          <LoginButton onClick={() => onClickSignin()}>{'로그인 하기'}</LoginButton>
         </LoginBox>
 
         <c.Image src="/images/main_companies.png" style={{ margin: '40px 0 1095.95px 0' }}></c.Image>

@@ -29,7 +29,7 @@ class ApiCtrl {
   // auth -- BEGIN
 
   async signup(signupInfo) {
-    return this.axios.post(`${CENTRAL_API_ROOT}/auth/signup/`, signupInfo).catch(this._handleError);
+    return this.axios.post(`${CENTRAL_API_ROOT}/auth/signup/`, signupInfo);
   }
 
   async login(loginInfo) {
@@ -78,6 +78,34 @@ class ApiCtrl {
    
   // transaction -- END
   
+  // office -- BEGIN
+
+  async getOffices() {
+    const header = await this.requestConfig();
+    return this.axios.get(`${CENTRAL_API_ROOT}/office/list/`, header);
+  }
+    
+  // office -- END
+  
+  // office -- BEGIN
+
+  async cardRequest(data) {
+    const formData = new FormData();
+    formData.append('firstName', data.firstName);
+    formData.append('lastName', data.lastName);
+    formData.append('middleName', data.middleName);
+    formData.append('email', data.email);
+    formData.append('mobile', data.mobile);
+    formData.append('address', data.address);
+    formData.append('office', data.office);
+    formData.append('file1', data.file1);
+    formData.append('file2', data.file2);
+    const header = await this.requestConfig();
+    return this.axios.post(`${CENTRAL_API_ROOT}/cardreq`, header);
+  }
+    
+  // office -- END
+
   async getEvent() {
     const header = await this.requestConfig();
     return this.axios.get(`${CENTRAL_API_ROOT}/businessUsers/event`, header);
@@ -451,6 +479,7 @@ class ApiCtrl {
   }
 
   async _handleError(err) {
+    console.log('handle error : ', err);
     if (!err.response) {
       throw err;
     }
