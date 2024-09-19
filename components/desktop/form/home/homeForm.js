@@ -83,6 +83,7 @@ const HomeForm = () => {
 
   useEffect(() => {
     const init = async () => {
+      await Stores.authStore.authenticate();
       console.log('authStatus:', Stores.authStore.authStatus);
       setStatus(Stores.authStore.authStatus);
     };

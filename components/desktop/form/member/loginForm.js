@@ -182,7 +182,7 @@ const LoginForm = ({setMemberShipState}) => {
               onChange={onChangePw} >
             </InputText>
           </InputBox>
-          <LoginButton onClick={() => onClickSignin(2)}>{'로그인 하기'}</LoginButton>
+          <LoginButton onClick={() => onClickSignin()}>{'로그인 하기'}</LoginButton>
         </LoginBox>
 
         <c.Image src="/images/main_companies.png" style={{ margin: '40px 0 1095.95px 0' }}></c.Image>

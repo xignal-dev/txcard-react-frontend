@@ -3,7 +3,7 @@
     "version": "0.2.0",
     "description": "travel express service",
     "scripts": {
-        "dev": "next -p 8100",
+        "dev": "cross-env NODE_OPTIONS='--openssl-legacy-provider' NEXT_PUBLIC_DEVICE=tablet next -p 8100",
         "build": "cross-env NODE_OPTIONS='--openssl-legacy-provider' next build",
         "devt": "cross-env NODE_OPTIONS='--openssl-legacy-provider' NEXT_PUBLIC_DEVICE=tablet next -p 8100",
         "devtt": "cross-env NODE_OPTIONS='--openssl-legacy-provider' NEXT_PUBLIC_CENTRAL_API_ENDPOINT=http://183.101.143.204:18589 NEXT_PUBLIC_DEVICE=tablet next -p 8100",

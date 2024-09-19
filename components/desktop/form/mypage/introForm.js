@@ -188,11 +188,6 @@ const HomeForm = () => {
     const init = async () => {
       // console.log('accessToken', window.localStorage.getItem('accessToken'));
       await Stores.userStore.getProfile();
-      // if(Stores.authStore.authStatus !== 'SUCCESS') {
-      //   Router.push({ pathname: '/' });
-      //   return;
-      // }
-
       setUser(Stores.userStore);
 
       await Stores.txStore.getTransactions();
