@@ -259,7 +259,7 @@ const HomeForm = () => {
             <c.Image src='/images/txpoint_txpoint_01.png' style={{ width: '126px' }}></c.Image>
             <MidAssetDescBox>
               <c.SmallText>{'TX POINT'}</c.SmallText>
-              <c.NormalText style={{ fontSize: '28px' }}>{user.cmEpoint}<span style={{ fontSize: '18px', color: '#ABABAB' }}>{' TX'}</span></c.NormalText>
+              <c.NormalText style={{ fontSize: '28px' }}>{user.cmEpoint ? user.cmEpoint.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : '0'}<span style={{ fontSize: '18px', color: '#ABABAB' }}>{' TX'}</span></c.NormalText>
               <c.TinyText style={{ fontSize: '18px', color: '#5383FF' }}>{'≈ 100,000 USDT / 200,000 KRW'}</c.TinyText>
             </MidAssetDescBox>
           </MidAssetBox>

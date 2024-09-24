@@ -203,10 +203,15 @@ const ExchangeForm = ({ setState }) => {
   const [exAmount, setExAmount] = useState('');
   const [exDeduction, setExDeduction] = useState('');
   const [exBalance, setExBalance] = useState('');
+  
+  const [user, setUser] = useState({});
 
 
   useEffect(() => {
     const init = async () => {
+      
+      await Stores.userStore.getProfile();
+      setUser(Stores.userStore);
     }
     
     init();
@@ -253,7 +258,7 @@ const ExchangeForm = ({ setState }) => {
             <c.Image src='/images/txpoint_txpoint_01.png' style={{ width: '126px' }}></c.Image>
             <TopAssetDescBox>
               <c.SmallText>{'TX POINT'}</c.SmallText>
-              <c.NormalText style={{ fontSize: '28px' }}>{'5,000,000'}<span style={{ fontSize: '18px', color: '#ABABAB' }}>{' TX'}</span></c.NormalText>
+              <c.NormalText style={{ fontSize: '28px' }}>{user.cmEpoint ? user.cmEpoint.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : ''}<span style={{ fontSize: '18px', color: '#ABABAB' }}>{' TX'}</span></c.NormalText>
               <c.TinyText style={{ fontSize: '18px', color: '#5383FF' }}>{'≈ 100,000 USDT / 200,000 KRW'}</c.TinyText>
             </TopAssetDescBox>
           </TopAssetBox>

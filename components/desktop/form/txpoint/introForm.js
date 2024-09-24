@@ -77,7 +77,7 @@ const MenuItem = styled.a`
 `;
 
 
-const IntroForm = ({ setState }) => {
+const IntroForm = ({ setState, user }) => {
 
   const stores = useStore(Stores);
 
