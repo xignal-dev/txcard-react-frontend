@@ -75,17 +75,20 @@ const HistoryTd = styled.td`
   padding: 10px;
 `;
 
-const HistoryForm = ({ setState }) => {
+const HistoryForm = ({ setState, user }) => {
 
   const stores = useStore(Stores);
-
-  const inputEl = useRef(null);
+  const [txList, setTxList] = useState([]);
 
 
   useEffect(() => {
     const init = async () => {
+
+      await Stores.txStore.getTransactions();
+      setTxList(Stores.txStore.txList);
+      console.log(Stores.txStore.txList);
     }
-    
+
     init();
   }, []);
 
@@ -111,30 +114,20 @@ const HistoryForm = ({ setState }) => {
               </tr>
             </thead>
             <tbody>
-              <HistoryTr>
-                <HistoryTd>1</HistoryTd>
-                <HistoryTd>2352598734</HistoryTd>
-                <HistoryTd>2024/06/23</HistoryTd>
-                <HistoryTd>1,200,000</HistoryTd>
-                <HistoryTd>2,300</HistoryTd>
-                <HistoryTd>12,000,000</HistoryTd>
-              </HistoryTr>
-              <HistoryTr>
-                <HistoryTd>2</HistoryTd>
-                <HistoryTd>2352598734</HistoryTd>
-                <HistoryTd>2024/06/23</HistoryTd>
-                <HistoryTd>1,200,000</HistoryTd>
-                <HistoryTd>2,300</HistoryTd>
-                <HistoryTd>12,000,000</HistoryTd>
-              </HistoryTr>
-              <HistoryTr>
-                <HistoryTd>3</HistoryTd>
-                <HistoryTd>2352598734</HistoryTd>
-                <HistoryTd>2024/06/23</HistoryTd>
-                <HistoryTd>1,200,000</HistoryTd>
-                <HistoryTd>2,300</HistoryTd>
-                <HistoryTd>12,000,000</HistoryTd>
-              </HistoryTr>
+              {
+                txList.map((item, idx) => {
+                  return (
+                    <HistoryTr key={idx}>
+                      <HistoryTd>{idx + 1}</HistoryTd>
+                      <HistoryTd>{item.ccTxnum}</HistoryTd>
+                      <HistoryTd>{item.ccTxdate}</HistoryTd>
+                      <HistoryTd>{item.ccAmount}</HistoryTd>
+                      <HistoryTd>{item.ccFeevat}</HistoryTd>
+                      <HistoryTd>{item.ccRunbal}</HistoryTd>
+                    </HistoryTr>
+                  );
+                })
+              }
             </tbody>
           </HistoryTable>
         </HistoryBox>

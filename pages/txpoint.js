@@ -77,14 +77,17 @@ const MenuItem = styled.a`
 const TxPoint = () => {
   const [state, setState] = useState(0);
   
+  const [user, setUser] = useState({});
+  
   useEffect(() => {
 		const init = async () => {
       // console.log("location.search >>> ", window.location.search);
       const params = new URLSearchParams(window.location.search);
       const stateVal = params.get("state");
-      setState(parseInt(stateVal));
-      
-      console.log(stateVal);
+      setState(parseInt(stateVal));      
+      // console.log(stateVal);
+      // await Stores.userStore.getProfile();
+      // setUser(Stores.userStore);
 		};
 
 		init();
@@ -106,7 +109,7 @@ const TxPoint = () => {
                 <MenuItem state={state} style={{border: state == 4 ? '0px solid #D9D9D9' : '3px solid #D9D9D9', backgroundColor: state == 4 ? '#0139CC' : '#000' }} onClick={() => setState(4)}>{'내역보기'}</MenuItem>
               </MenuBox>
               
-              {state === 1 ? <IntroForm setState={setState} /> : state === 2 ? <ExchangeForm setState={setState} /> : state === 3 ? <GiftForm setState={setState} /> : state === 4 ? <HistoryForm setState={setState} /> : <></>}
+              {state === 1 ? <IntroForm setState={setState} user={user} /> : state === 2 ? <ExchangeForm setState={setState} user={user} /> : state === 3 ? <GiftForm setState={setState} user={user} /> : state === 4 ? <HistoryForm setState={setState} user={user} /> : <></>}
 
 
             </TopContainer>

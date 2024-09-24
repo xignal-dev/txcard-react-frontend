@@ -505,13 +505,16 @@ class ApiCtrl {
         // console.log(refreshToken);
         header.headers.Authorization = `Bearer ${refreshToken}`;
         header.headers["Cache-Control"] = "no-cache";
-        const res = await axios.post(`${CENTRAL_API_ROOT}/auth/authorise/`, {}, header).catch(authErr => {
+        const res = await axios.post(`${CENTRAL_API_ROOT}/auth/authorise/`, {}, header).then(res => {
+          console.log(res);
+          return res;
+        }).catch(authErr => {
           console.log('handle error : ', authErr.response.data.message);
           Router.push('/');
           throw authErr;
         });
-        console.log(res.response);
-        return res.response;
+        // console.log(res);
+        return res;
       }      
     }
   }
