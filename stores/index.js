@@ -10,7 +10,9 @@ import { useProvider, useCreateStore } from "mobx-store-provider";
 import UserStore from "./_userStore";
 import AuthStore from "./_authStore";
 import OfficeStore from './_officeStore';
-import TxStore from './_transactionStore';
+import TxStore from './_txStore';
+import PointStore from './_pointStore';
+import ConfigStore from './_configStore';
 
 // import AlertStore from "./smbAlertStore";
 // import SettingsStore from "./smbSettingsStore";
@@ -27,6 +29,8 @@ export const RootStore = types.model('RootStore', {
   userStore: UserStore,
   officeStore: OfficeStore,
   txStore: TxStore,
+  pointStore: PointStore,
+  configStore: ConfigStore,
 });
 
 // export const Stores = useCreateStore(RootStore, {
@@ -42,6 +46,8 @@ const Stores = RootStore.create({
   userStore: UserStore.create(),
   txStore: TxStore.create(),
   officeStore: OfficeStore.create(),
+  pointStore: PointStore.create(),
+  configStore: ConfigStore.create(),
 });
 
 // stores['socketStore'] = socketStore;

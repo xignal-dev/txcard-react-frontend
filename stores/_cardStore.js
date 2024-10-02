@@ -30,10 +30,12 @@ const CardStore = observable(types.model("CardStore", {
     // },
     
     async cardRequest(data) {
-      await apiCtrl.cardRequest(data).then(response => {
+      await apiCtrl.cardRequest(data).then(async response => {
         try {
-          console.log(response.data);
-          // self.setOffices(response.data.officeList);
+          // console.log(response.data);
+          if(response.data.accessToken) {
+            await apiCtrl.cardRequest(data);
+          }
         } catch (e) {
           console.log(e);
         }
