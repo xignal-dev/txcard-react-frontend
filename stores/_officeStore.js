@@ -30,10 +30,13 @@ const OfficeStore = observable(types.model("OfficeStore", {
     },
     
     async getOffices() {
-      await apiCtrl.getOffices().then(response => {
+      await apiCtrl.getOffices().then(async response => {
         try {
-          console.log(response.data.officeList);
-          self.setOffices(response.data.officeList);
+          let data = response.data;
+          if(data.accessToken) {
+            data = await apiCtrl.getProfile().data;
+          }
+          self.setOffices(data.officeList);
         } catch (e) {
           console.log(e);
         }

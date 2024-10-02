@@ -164,6 +164,7 @@ const ExchangeForm = ({ setState }) => {
 
   const [email, setEmail] = useState('');
   const [txPoint, setTxPoint] = useState('');
+  const [exRate, setExRate] = useState({});
   
   const [user, setUser] = useState({});
 
@@ -173,20 +174,37 @@ const ExchangeForm = ({ setState }) => {
       
       await Stores.userStore.getProfile();
       setUser(Stores.userStore);
+      
+      await Stores.configStore.getExchangeRate();
+      setExRate(Stores.configStore.exchangeRate);
     }
     
     init();
   }, []);
 
 
-  const onChangeEmailt = (e) => {
-    e.target.value = e.target.value.replace(/[^0-9]/g, '');
+  const onChangeEmail = (e) => {
+    // e.target.value = e.target.value.replace(/[^0-9]/g, '');
     setEmail(e.target.value);
   }
 
   const onChangeTxPoint = (e) => {
     e.target.value = e.target.value.replace(/[^0-9]/g, '');
     setTxPoint(e.target.value);
+  }
+  
+  const onSubmit = async () => {
+    
+    let data = {
+      id: Stores.userStore.cmId,
+      email: Stores.userStore.cmEmail,
+      name: Stores.userStore.cmName,
+      office: Stores.userStore.cmOffice,
+      point: txPoint,
+      recvEmail: email,
+    }
+    console.log(data);
+    await Stores.pointStore.pointGift(data);
   }
 
   return (
@@ -209,7 +227,7 @@ const ExchangeForm = ({ setState }) => {
             <TopAssetDescBox>
               <c.SmallText>{'TX POINT'}</c.SmallText>
               <c.NormalText style={{ fontSize: '28px' }}>{user.cmEpoint ? user.cmEpoint.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : ''}<span style={{ fontSize: '18px', color: '#ABABAB' }}>{' TX'}</span></c.NormalText>
-              <c.TinyText style={{ fontSize: '18px', color: '#5383FF' }}>{'≈ 100,000 USDT / 200,000 KRW'}</c.TinyText>
+              <c.TinyText style={{ fontSize: '18px', color: '#5383FF' }}>{'≈ ' + Math.floor(user.cmEpoint * exRate.usd) / 100 + ' USDT / ' + user.cmEpoint + ' KRW'}</c.TinyText>
             </TopAssetDescBox>
           </TopAssetBox>
         </TopContentBox>
@@ -237,7 +255,7 @@ const ExchangeForm = ({ setState }) => {
                     value={email}
                     placeholder={'email'}
                     style={{ minWidth: '121px' }}
-                    onChange={onChangeEmailt} >
+                    onChange={onChangeEmail} >
                   </InputText>
                 </InputBox>
               </GiftInfoBox>
@@ -246,7 +264,7 @@ const ExchangeForm = ({ setState }) => {
                 <c.LargeText style={{ fontSize: '28px' }}>{'선물할 TX POINT'}</c.LargeText>
                 <InputBox>
                   <InputText
-                    type={'password'}
+                    type={'input'}
                     value={txPoint}
                     placeholder={'0'}
                     style={{ minWidth: '121px' }}
@@ -255,7 +273,7 @@ const ExchangeForm = ({ setState }) => {
                 </InputBox>
               </GiftInfoBox>
 
-              <Submit style={{ marginLeft: '25%' }}>{'선물하기'}</Submit>
+              <Submit onClick={() => onSubmit()} style={{ marginLeft: '25%' }}>{'선물하기'}</Submit>
             </ContentBox>
 
           </RightBox>

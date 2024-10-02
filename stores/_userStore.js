@@ -112,10 +112,12 @@ const UserStore = observable(types.model('UserStore', {
   },
 
   async getProfile() {
-    await apiCtrl.getProfile().then(response => {
+    await apiCtrl.getProfile().then(async response => {
       try {
         let data = response.data;
-        console.log(data);
+        if(data.accessToken) {
+          data = await apiCtrl.getProfile().data;
+        }
         self.setUser(data.profile);
       } catch (e) {
         console.log(e);

@@ -203,15 +203,18 @@ const ExchangeForm = ({ setState }) => {
   const [exAmount, setExAmount] = useState('');
   const [exDeduction, setExDeduction] = useState('');
   const [exBalance, setExBalance] = useState('');
+  const [exRate, setExRate] = useState({});
   
   const [user, setUser] = useState({});
 
 
   useEffect(() => {
     const init = async () => {
-      
       await Stores.userStore.getProfile();
       setUser(Stores.userStore);
+      
+      await Stores.configStore.getExchangeRate();
+      setExRate(Stores.configStore.exchangeRate);
     }
     
     init();
@@ -232,10 +235,18 @@ const ExchangeForm = ({ setState }) => {
     e.target.value = e.target.value.replace(/[^0-9]/g, '');
     setExBalance(e.target.value);
   }
-
-  const onChangeCardNum4 = (e) => {
-    e.target.value = e.target.value.replace(/[^0-9]/g, '');
-    setCardNum4(e.target.value);
+  
+  const onSubmit = async () => {
+    
+    let data = {
+      email: Stores.userStore.cmEmail,
+      name: Stores.userStore.cmName,
+      office: Stores.userStore.cmOffice,
+      point: Math.floor(exAmount / exRate.vnd).toString(),
+      amount: exAmount,
+    }
+    console.log(data);
+    await Stores.pointStore.pointExchange(data);
   }
 
 
@@ -259,7 +270,7 @@ const ExchangeForm = ({ setState }) => {
             <TopAssetDescBox>
               <c.SmallText>{'TX POINT'}</c.SmallText>
               <c.NormalText style={{ fontSize: '28px' }}>{user.cmEpoint ? user.cmEpoint.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') : ''}<span style={{ fontSize: '18px', color: '#ABABAB' }}>{' TX'}</span></c.NormalText>
-              <c.TinyText style={{ fontSize: '18px', color: '#5383FF' }}>{'≈ 100,000 USDT / 200,000 KRW'}</c.TinyText>
+              <c.TinyText style={{ fontSize: '18px', color: '#5383FF' }}>{'≈ ' + Math.floor(user.cmEpoint * exRate.usd) / 100 + ' USDT / ' + user.cmEpoint + ' KRW'}</c.TinyText>
             </TopAssetDescBox>
           </TopAssetBox>
         </TopContentBox>
@@ -281,7 +292,7 @@ const ExchangeForm = ({ setState }) => {
 
               <ExchangeInfoBox>
                 <c.LargeText style={{ fontSize: '28px' }}>{'오늘의 환율'}</c.LargeText>
-                <c.NormalText style={{ fontSize: '20px', color: '#5383FF' }}>{'18.00 VND ≈ 10 USDT / 100 KRW'}</c.NormalText>
+                <c.NormalText style={{ fontSize: '20px', color: '#5383FF' }}>{Math.floor(10000 * exRate.vnd) / 100 + ' ≈ ' + Math.floor(10000 * exRate.usd) / 100 + ' USDT / ' + 10000 + ' TXP'}</c.NormalText>
               </ExchangeInfoBox>
 
               <ExchangeInfoBox style={{ marginTop: '7px' }}>
@@ -298,32 +309,34 @@ const ExchangeForm = ({ setState }) => {
               </ExchangeInfoBox>
 
               <ExchangeInfoBox style={{ marginTop: '7px' }}>
-                <c.LargeText style={{ fontSize: '28px' }}>{'TX PONT 차감'}</c.LargeText>
+                <c.LargeText style={{ fontSize: '28px' }}>{'TX POINT 차감'}</c.LargeText>
                 <InputBox>
                   <InputText
-                    type={'password'}
-                    value={exDeduction}
+                    type={'input'}
+                    value={Math.floor(exAmount / exRate.vnd)}
                     placeholder={'0'}
                     style={{ minWidth: '121px' }}
+                    readOnly={true}
                     onChange={onChangeExDeduction} >
                   </InputText>
                 </InputBox>
               </ExchangeInfoBox>
 
               <ExchangeInfoBox style={{ marginTop: '7px' }}>
-                <c.LargeText style={{ fontSize: '28px' }}>{'TX PONT 잔액'}</c.LargeText>
+                <c.LargeText style={{ fontSize: '28px' }}>{'TX POINT 잔액'}</c.LargeText>
                 <InputBox>
                   <InputText
-                    type={'password'}
-                    value={exBalance}
+                    type={'input'}
+                    value={user.cmEpoint - Math.floor(exAmount / exRate.vnd)}
                     placeholder={'0'}
                     style={{ minWidth: '121px' }}
+                    readOnly={true}
                     onChange={onChangeExBalance} >
                   </InputText>
                 </InputBox>
               </ExchangeInfoBox>
 
-              <Submit style={{ marginLeft: '25%' }}>{'등록신청'}</Submit>
+              <Submit onClick={() => onSubmit()} style={{ marginLeft: '25%' }}>{'교환신청'}</Submit>
             </ContentBox>
 
           </RightBox>

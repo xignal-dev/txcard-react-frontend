@@ -80,12 +80,15 @@ const AuthStore = observable(types.model('AuthStore', {
 
     if (accessToken) {
       console.log(accessToken);
-      return await apiCtrl.getProfile().then((response) => {
-        // console.log(response);
+      return await apiCtrl.getProfile().then(async (response) => {
         let data = response.data;
+        if(data.accessToken) {
+          data = await apiCtrl.getProfile().data;
+        }
         getParent(self).userStore.setUser(data);
         self.setAuthenticationStatus('SUCCESS');
-        console.log(data);
+        // self.setAccessToken(data.accessToken);
+        // console.log(data);
         return response;
       }).catch(error => {
         console.log(error);

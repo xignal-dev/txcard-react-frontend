@@ -87,6 +87,29 @@ class ApiCtrl {
     
   // office -- END
   
+  // point -- BEGIN
+  
+  async pointGift(data) {
+    const header = await this.requestConfig();
+    return this.axios.post(`${CENTRAL_API_ROOT}/point/gift/`, data, header);
+  }
+
+  async pointExchange(data) {
+    const header = await this.requestConfig();
+    return this.axios.post(`${CENTRAL_API_ROOT}/point/exchange/`, data, header);
+  }
+    
+  // point -- END
+  
+  // config -- BEGIN
+  
+  async getExchangeRate() {
+    const header = await this.requestConfig();
+    return this.axios.get(`${CENTRAL_API_ROOT}/config/exchangeRate/`, header);
+  }
+    
+  // config -- END
+  
   // office -- BEGIN
 
   async cardRequest(data) {
@@ -506,7 +529,8 @@ class ApiCtrl {
         header.headers.Authorization = `Bearer ${refreshToken}`;
         header.headers["Cache-Control"] = "no-cache";
         const res = await axios.post(`${CENTRAL_API_ROOT}/auth/authorise/`, {}, header).then(res => {
-          console.log(res);
+          // console.log(res);
+          window.localStorage.setItem('accessToken', res.data.accessToken);
           return res;
         }).catch(authErr => {
           console.log('handle error : ', authErr.response.data.message);
